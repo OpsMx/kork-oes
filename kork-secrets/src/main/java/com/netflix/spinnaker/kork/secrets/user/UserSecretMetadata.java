@@ -35,4 +35,11 @@ public class UserSecretMetadata {
   @Nullable private final String encoding;
   /** Returns the authorized roles that can use the user secret. */
   @Nonnull private final List<String> roles;
+
+  public UserSecretMetadata(
+      @Nonnull String type, @Nullable String encoding, @Nonnull List<String> roles) {
+    this.type = type;
+    this.encoding = encoding;
+    this.roles = roles;
+  }
 }

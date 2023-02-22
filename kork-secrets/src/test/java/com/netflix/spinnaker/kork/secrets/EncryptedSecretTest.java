@@ -16,16 +16,13 @@
 
 package com.netflix.spinnaker.kork.secrets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class EncryptedSecretTest {
-
-  @Rule public ExpectedException exceptionRule = ExpectedException.none();
 
   @Test
   public void isEncryptedSecretShouldReturnFalse() {
@@ -95,20 +92,45 @@ public class EncryptedSecretTest {
 
   @Test
   public void updateThrowsInvalidSecretFormatException() {
-    exceptionRule.expect(InvalidSecretFormatException.class);
+    /*exceptionRule.expect(InvalidSecretFormatException.class);
     exceptionRule.expectMessage(
         "Invalid encrypted secret format, must have at least one parameter");
     EncryptedSecret encryptedSecret = new EncryptedSecret();
-    encryptedSecret.update("encrypted:s3");
+    encryptedSecret.update("encrypted:s3");*/
+    EncryptedSecret encryptedSecret = new EncryptedSecret();
+
+    InvalidSecretFormatException exception =
+        Assertions.assertThrows(
+            InvalidSecretFormatException.class,
+            () -> {
+              encryptedSecret.update("encrypted:s3");
+            },
+            "Invalid encrypted secret format, must have at least one parameter");
+    Assertions.assertEquals(
+        "Invalid encrypted secret format, must have at least one parameter",
+        exception.getMessage());
   }
 
   @Test
   public void updateThrowsInvalidSecretFormatExceptionNoKeyValuePairs() {
-    exceptionRule.expect(InvalidSecretFormatException.class);
+    /*  exceptionRule.expect(InvalidSecretFormatException.class);
     exceptionRule.expectMessage(
         "Invalid encrypted secret format, keys and values must be delimited by ':'");
     EncryptedSecret encryptedSecret = new EncryptedSecret();
-    encryptedSecret.update("encrypted:s3!foobar");
+    encryptedSecret.update("encrypted:s3!foobar");*/
+
+    EncryptedSecret encryptedSecret = new EncryptedSecret();
+
+    InvalidSecretFormatException exception =
+        Assertions.assertThrows(
+            InvalidSecretFormatException.class,
+            () -> {
+              encryptedSecret.update("encrypted:s3!foobar");
+            },
+            "Invalid encrypted secret format, keys and values must be delimited by ':'");
+    Assertions.assertEquals(
+        "Invalid encrypted secret format, keys and values must be delimited by ':'",
+        exception.getMessage());
   }
 
   @Test

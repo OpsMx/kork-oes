@@ -16,8 +16,8 @@
 
 package com.netflix.spinnaker.kork.secrets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -25,10 +25,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
-import org.junit.*;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -40,9 +39,7 @@ public class SecretManagerTest {
 
   SecretManager secretManager;
 
-  @Rule public ExpectedException exceptionRule = ExpectedException.none();
-
-  @Before
+  @BeforeEach
   public void setup() {
     MockitoAnnotations.initMocks(this);
     when(secretEngineRegistry.getEngine("s3")).thenReturn(secretEngine);
@@ -62,9 +59,14 @@ public class SecretManagerTest {
   public void decryptSecretEngineNotFound() throws SecretDecryptionException {
     when(secretEngineRegistry.getEngine("does-not-exist")).thenReturn(null);
     String secretConfig = "encrypted:does-not-exist!paramName:paramValue";
-    exceptionRule.expect(SecretDecryptionException.class);
-    exceptionRule.expectMessage("Secret Engine does not exist: does-not-exist");
-    secretManager.decrypt(secretConfig);
+    SecretDecryptionException exception =
+        Assertions.assertThrows(
+            SecretDecryptionException.class,
+            () -> {
+              secretManager.decrypt(secretConfig);
+            },
+            "Secret Engine does not exist: does-not-exist");
+    Assertions.assertEquals("Secret Engine does not exist: does-not-exist", exception.getMessage());
   }
 
   @Test
@@ -73,8 +75,15 @@ public class SecretManagerTest {
         .when(secretEngine)
         .validate(any(EncryptedSecret.class));
     String secretConfig = "encrypted:s3!paramName:paramValue";
-    exceptionRule.expect(InvalidSecretFormatException.class);
-    secretManager.decrypt(secretConfig);
+    // exceptionRule.expect(InvalidSecretFormatException.class);
+    InvalidSecretFormatException exception =
+        Assertions.assertThrows(
+            InvalidSecretFormatException.class,
+            () -> {
+              secretManager.decrypt(secretConfig);
+            });
+
+    // secretManager.decrypt(secretConfig);
   }
 
   @Test
@@ -92,9 +101,17 @@ public class SecretManagerTest {
   public void decryptFileSecretEngineNotFound() throws SecretDecryptionException {
     when(secretEngineRegistry.getEngine("does-not-exist")).thenReturn(null);
     String secretConfig = "encrypted:does-not-exist!paramName:paramValue";
-    exceptionRule.expect(SecretDecryptionException.class);
-    exceptionRule.expectMessage("Secret Engine does not exist: does-not-exist");
-    secretManager.decryptAsFile(secretConfig);
+    // exceptionRule.expect(SecretDecryptionException.class);
+    // exceptionRule.expectMessage("Secret Engine does not exist: does-not-exist");
+    // secretManager.decryptAsFile(secretConfig);
+    SecretDecryptionException exception =
+        Assertions.assertThrows(
+            SecretDecryptionException.class,
+            () -> {
+              secretManager.decryptAsFile(secretConfig);
+            },
+            "Secret Engine does not exist: does-not-exist");
+    Assertions.assertEquals("Secret Engine does not exist: does-not-exist", exception.getMessage());
   }
 
   @Test
@@ -103,8 +120,14 @@ public class SecretManagerTest {
         .when(secretEngine)
         .validate(any(EncryptedSecret.class));
     String secretConfig = "encrypted:s3!paramName:paramValue";
-    exceptionRule.expect(InvalidSecretFormatException.class);
-    secretManager.decryptAsFile(secretConfig);
+    // exceptionRule.expect(InvalidSecretFormatException.class);
+    // secretManager.decryptAsFile(secretConfig);
+    InvalidSecretFormatException exception =
+        Assertions.assertThrows(
+            InvalidSecretFormatException.class,
+            () -> {
+              secretManager.decryptAsFile(secretConfig);
+            });
   }
 
   @Test
@@ -113,8 +136,14 @@ public class SecretManagerTest {
     doThrow(SecretDecryptionException.class).when(spy).createTempFile(any(), any());
     doReturn("contents").when(spy).decrypt(any());
     doCallRealMethod().when(spy).decryptAsFile(any());
-    exceptionRule.expect(SecretDecryptionException.class);
+    // exceptionRule.expect(SecretDecryptionException.class);
     String secretConfig = "encrypted:s3!paramName:paramValue";
-    spy.decryptAsFile(secretConfig);
+    // spy.decryptAsFile(secretConfig);
+    SecretDecryptionException exception =
+        Assertions.assertThrows(
+            SecretDecryptionException.class,
+            () -> {
+              spy.decryptAsFile(secretConfig);
+            });
   }
 }

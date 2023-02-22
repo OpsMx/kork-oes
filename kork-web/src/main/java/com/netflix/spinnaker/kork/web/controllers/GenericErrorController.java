@@ -18,6 +18,7 @@ package com.netflix.spinnaker.kork.web.controllers;
 
 import com.netflix.spinnaker.kork.exceptions.HasAdditionalAttributes;
 import java.util.Map;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,10 +36,10 @@ public class GenericErrorController implements ErrorController {
 
   @RequestMapping(value = "/error")
   public Map error(
-      @RequestParam(value = "trace", defaultValue = "false") Boolean includeStackTrace,
+      // @RequestParam(value = "trace", defaultValue = "false") Boolean includeStackTrace,
+      @RequestParam(value = "trace", defaultValue = "false") ErrorAttributeOptions options,
       WebRequest webRequest) {
-    Map<String, Object> attributes =
-        errorAttributes.getErrorAttributes(webRequest, includeStackTrace);
+    Map<String, Object> attributes = errorAttributes.getErrorAttributes(webRequest, options);
 
     Throwable exception = errorAttributes.getError(webRequest);
     if (exception != null && exception instanceof HasAdditionalAttributes) {
@@ -48,8 +49,10 @@ public class GenericErrorController implements ErrorController {
     return attributes;
   }
 
-  @Override
+  // @Override
   public String getErrorPath() {
-    return "/error";
+    // https://stackoverflow.com/questions/62436379/how-to-replace-errorcontroller-deprecated-function-on-spring-boot
+    // return "/error";
+    return null;
   }
 }
