@@ -35,7 +35,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @NonnullByDefault
 public class UserSecretManager {
-  private final SecretEngineRegistry registry;
+  private SecretEngineRegistry registry;
 
   /**
    * Fetches and decrypts the given parsed user secret reference.

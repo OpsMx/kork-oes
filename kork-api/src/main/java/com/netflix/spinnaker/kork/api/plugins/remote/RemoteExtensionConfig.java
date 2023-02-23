@@ -65,7 +65,7 @@ public class RemoteExtensionConfig {
   @AllArgsConstructor
   public static class RemoteExtensionTransportConfig {
 
-    @Nonnull private Http http = new Http();
+    @Nonnull public Http http = new Http();
 
     @Data
     @NoArgsConstructor
@@ -82,7 +82,7 @@ public class RemoteExtensionConfig {
       @Nonnull private Map<String, String> config = new HashMap<>();
 
       /** Headers for the various invocation types. */
-      @Nonnull private Headers headers = new Headers();
+      @Nonnull public Headers headers = new Headers();
 
       @Data
       @NoArgsConstructor

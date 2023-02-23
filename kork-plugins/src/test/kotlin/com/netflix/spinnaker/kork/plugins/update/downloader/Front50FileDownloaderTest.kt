@@ -22,9 +22,12 @@ import io.mockk.mockk
 import java.net.URL
 import okhttp3.Call
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import strikt.api.expect
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -40,8 +43,14 @@ class Front50FileDownloaderTest : JUnit5Minutests {
 
     test("files are downloaded to a temp directory") {
       every { response.isSuccessful } returns true
-      every { response.code() } returns 200
-      every { response.body() } returns ResponseBody.create(MediaType.parse("application/zip"), "oh hi")
+      every { response.code } returns 200
+      every { response.body } returns /*ResponseBody.create(
+        MediaType.parse("application/zip"),
+        "oh hi"
+
+      )*/
+      "oh hi".toResponseBody("application/zip".toMediaTypeOrNull())
+
 
       expectThat(subject.downloadFile(URL("http://front50.com/myplugin.zip"))) {
         get { toFile().readText() }.isEqualTo("oh hi")

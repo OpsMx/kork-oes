@@ -62,7 +62,7 @@ public class UserSecretReference {
   private static final Pattern SECRET_URI = Pattern.compile("^secret(File)?://.+");
   public static final String SECRET_SCHEME = "secret";
 
-  @Nonnull private final String engineIdentifier;
+  @Nonnull private String engineIdentifier;
   @Nonnull private final Map<String, String> parameters = new ConcurrentHashMap<>();
 
   private UserSecretReference(URI uri) {
