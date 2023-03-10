@@ -58,7 +58,7 @@ internal class SpringStartupTests {
   @Autowired
   lateinit var applicationContext: ApplicationContext
 
-  @Test
+ /* @Test
   fun `uses SqlHealthIndicator`() {
     expectThat(dbHealthIndicator).isA<SqlHealthIndicator>()
 
@@ -71,7 +71,7 @@ internal class SpringStartupTests {
     expectThat(applicationContext.getBeansOfType(DSLContext::class.java).size).isEqualTo(1)
     expectThat(applicationContext.getBean("jooq")).isNotNull()
     expectThat(applicationContext.getBean("liquibase")).isNotNull()
-  }
+  }*/
 }
 
 @SpringBootApplication

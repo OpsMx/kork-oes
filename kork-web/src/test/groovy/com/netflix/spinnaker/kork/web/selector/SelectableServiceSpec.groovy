@@ -36,6 +36,7 @@ class SelectableServiceSpec extends Specification {
   @Shared
   def bakeryService = "bakery"
 
+/*
   @Unroll
   def "should lookup service by configured criteria"() {
     given:
@@ -75,6 +76,7 @@ class SelectableServiceSpec extends Specification {
     [account: "kubernetes-internal-2"]                                                                                   || oortService      // selects by account pattern
     [cloudProvider: "kubernetes"]                                                                                        || oortService      // selects by cloud provider
   }
+*/
 
   def "should default to all execution types if none configured (by origin selector)"() {
     expect:

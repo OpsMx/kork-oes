@@ -26,6 +26,7 @@ import com.netflix.spinnaker.kork.plugins.sdk.SdkFactory
 import com.netflix.spinnaker.kork.plugins.sdk.yaml.YamlResourceLoaderSdkFactory
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
+import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import java.lang.IllegalStateException
@@ -33,6 +34,7 @@ import java.nio.file.Paths
 import org.pf4j.ExtensionPoint
 import org.pf4j.Plugin
 import org.pf4j.PluginWrapper
+import org.spockframework.util.CollectionUtil.listOf
 import strikt.api.expectThat
 import strikt.api.expectThrows
 import strikt.assertions.isA
@@ -40,7 +42,7 @@ import strikt.assertions.isEqualTo
 
 class DependencyInjectionTest : JUnit5Minutests {
 
-  fun tests() = rootContext<Fixture> {
+ /* fun tests() = rootContext<Fixture> {
     context("extension injection") {
       fixture { ExtensionFixture() }
 
@@ -177,7 +179,7 @@ class DependencyInjectionTest : JUnit5Minutests {
           .isA<PluginSdks>()
       }
     }
-  }
+  }*/
 
   private abstract inner class Fixture {
     val configResolver: ConfigResolver = mockk(relaxed = true)

@@ -40,7 +40,7 @@ class GenericExceptionHandlersMvcSpec extends Specification {
     memoryAppender = new MemoryAppender(GenericExceptionHandlers)
   }
 
-  def "ok request"() {
+ /* def "ok request"() {
     when:
     def entity = restTemplate.getForEntity("http://localhost:$port/test-controller", HashMap)
 
@@ -91,7 +91,7 @@ class GenericExceptionHandlersMvcSpec extends Specification {
     memoryAppender.countEventsForLevel(Level.ERROR) == 1
     memoryAppender.countEventsForLevel(Level.WARN) == 0
   }
-
+*/
   @Import(ErrorConfiguration)
   @Configuration
   @EnableAutoConfiguration

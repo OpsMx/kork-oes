@@ -18,6 +18,7 @@ package com.netflix.spinnaker.kork.plugins
 
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
+import dev.minutest.test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 import strikt.assertions.isFalse

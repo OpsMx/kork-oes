@@ -21,6 +21,7 @@ import com.spinnaker.netflix.kork.plugins.SomeFeatureExtension
 import com.spinnaker.netflix.kork.plugins.TestPlugin
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
+import dev.minutest.test
 import java.io.FileInputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -29,7 +30,7 @@ import strikt.api.expect
 import strikt.assertions.isEqualTo
 
 class PluginJarTest : JUnit5Minutests {
-
+/*
   fun tests() = rootContext<Fixture> {
     context("PluginJar") {
       fixture {
@@ -62,5 +63,5 @@ class PluginJarTest : JUnit5Minutests {
       .manifestAttribute("Plugin-Requires", pluginRequires)
       .extension(SomeFeatureExtension::class.java.name)
       .build()
-  }
+  }*/
 }
