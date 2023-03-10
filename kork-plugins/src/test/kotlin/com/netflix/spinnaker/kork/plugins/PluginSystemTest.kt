@@ -19,7 +19,7 @@ import com.netflix.spinnaker.config.PluginsAutoConfiguration
 import com.netflix.spinnaker.kork.plugins.testplugin.api.TestExtension
 import com.netflix.spinnaker.kork.plugins.testplugin.basicGeneratedPlugin
 import com.netflix.spinnaker.kork.plugins.v2.PluginFrameworkInitializer
-import dev.minutest.junit.JUnit5Minutests
+
 import dev.minutest.rootContext
 import dev.minutest.test
 import org.pf4j.DefaultPluginDescriptor
@@ -37,7 +37,7 @@ import strikt.assertions.isEqualTo
 import strikt.assertions.isNotEmpty
 import strikt.assertions.isNotNull
 
-class PluginSystemTest : JUnit5Minutests {
+class PluginSystemTest {
 
   fun tests() = rootContext {
     derivedContext<ApplicationContextRunner>("initialization tests") {

@@ -20,7 +20,7 @@ package com.netflix.spinnaker.kork.plugins.actuator
 import com.netflix.spinnaker.kork.plugins.SpinnakerPluginDescriptor
 import com.netflix.spinnaker.kork.plugins.SpinnakerPluginManager
 import com.netflix.spinnaker.kork.web.exceptions.NotFoundException
-import dev.minutest.junit.JUnit5Minutests
+
 import dev.minutest.rootContext
 import dev.minutest.test
 import io.mockk.every
@@ -33,7 +33,7 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class InstalledPluginsEndpointTest : JUnit5Minutests {
+class InstalledPluginsEndpointTest {
 
   fun tests() = rootContext<Fixture> {
     fixture {

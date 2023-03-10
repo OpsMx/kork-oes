@@ -21,12 +21,14 @@ import com.netflix.spinnaker.kork.plugins.update.internal.SpinnakerPluginInfo
 import com.netflix.spinnaker.kork.plugins.update.internal.SpinnakerPluginInfo.SpinnakerPluginRelease
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
+import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import java.net.URL
 import java.util.Collections
 import org.pf4j.update.SimpleFileDownloader
 import org.pf4j.update.verifier.CompoundVerifier
+import org.spockframework.util.CollectionUtil.listOf
 import retrofit2.Response
 import strikt.api.expectThat
 import strikt.assertions.get

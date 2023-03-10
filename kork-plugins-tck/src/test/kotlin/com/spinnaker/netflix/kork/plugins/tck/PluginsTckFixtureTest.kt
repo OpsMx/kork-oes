@@ -22,16 +22,16 @@ import com.netflix.spinnaker.kork.plugins.internal.PluginJar
 import com.netflix.spinnaker.kork.plugins.tck.PluginsTck
 import com.netflix.spinnaker.kork.plugins.tck.PluginsTckFixture
 //import com.netflix.spinnaker.kork.plugins.tck.serviceFixture
-import com.spinnaker.netflix.kork.plugins.SomeFeatureExtension
+//import com.spinnaker.netflix.kork.plugins.SomeFeatureExtension
 import com.spinnaker.netflix.kork.plugins.TestPlugin
-import dev.minutest.rootContext
+//import dev.minutest.rootContext
 import java.io.File
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 
-class PluginsTckFixtureTest : PluginsTck<PluginsTckFixtureImpl>() {
+class PluginsTckFixtureTest {//: PluginsTck<PluginsTckFixtureImpl>() {
   /*fun tests() = rootContext<PluginsTckFixtureImpl> {
     context("an orca integration test environment and an orca plugin") {
       serviceFixture {

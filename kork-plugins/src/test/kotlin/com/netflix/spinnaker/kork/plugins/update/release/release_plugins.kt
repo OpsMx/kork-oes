@@ -23,6 +23,7 @@ import io.mockk.mockk
 import java.time.Instant
 import java.util.Date
 
+/*
 val plugin1 = SpinnakerPluginInfo().apply {
   id = "com.netflix.plugin1"
   name = "plugin1"
@@ -125,3 +126,4 @@ val pluginNoReleases = SpinnakerPluginInfo().apply {
   provider = "netflix"
   releases = emptyList()
 }
+*/

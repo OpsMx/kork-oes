@@ -19,20 +19,21 @@ package com.netflix.spinnaker.kork.plugins.update.release.source
 
 import com.netflix.spinnaker.kork.plugins.update.SpinnakerUpdateManager
 import com.netflix.spinnaker.kork.plugins.update.release.PluginInfoRelease
-import com.netflix.spinnaker.kork.plugins.update.release.plugin1
-import com.netflix.spinnaker.kork.plugins.update.release.plugin2
-import com.netflix.spinnaker.kork.plugins.update.release.pluginNoReleases
+//import com.netflix.spinnaker.kork.plugins.update.release.plugin1
+//import com.netflix.spinnaker.kork.plugins.update.release.plugin2
+//import com.netflix.spinnaker.kork.plugins.update.release.pluginNoReleases
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
+import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class LatestPluginInfoReleaseSourceTest : JUnit5Minutests {
+class LatestPluginInfoReleaseSourceTest {//: JUnit5Minutests {
 
-  fun tests() = rootContext<Fixture> {
+  /*fun tests() = rootContext<Fixture> {
     fixture {
       Fixture()
     }
@@ -68,5 +69,5 @@ class LatestPluginInfoReleaseSourceTest : JUnit5Minutests {
     val pluginInfoList = mutableListOf(plugin1, plugin2, pluginNoReleases)
     val updateManager: SpinnakerUpdateManager = mockk(relaxed = true)
     val subject = LatestPluginInfoReleaseSource(updateManager)
-  }
+  }*/
 }

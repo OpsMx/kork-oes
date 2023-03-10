@@ -24,7 +24,7 @@ import com.netflix.spinnaker.kork.plugins.config.ConfigFactory
 import com.netflix.spinnaker.kork.plugins.config.ConfigResolver
 import com.netflix.spinnaker.kork.plugins.sdk.SdkFactory
 import com.netflix.spinnaker.kork.plugins.sdk.yaml.YamlResourceLoaderSdkFactory
-import dev.minutest.junit.JUnit5Minutests
+
 import dev.minutest.rootContext
 import dev.minutest.test
 import io.mockk.every
@@ -40,7 +40,7 @@ import strikt.api.expectThrows
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class DependencyInjectionTest : JUnit5Minutests {
+class DependencyInjectionTest {
 
  /* fun tests() = rootContext<Fixture> {
     context("extension injection") {

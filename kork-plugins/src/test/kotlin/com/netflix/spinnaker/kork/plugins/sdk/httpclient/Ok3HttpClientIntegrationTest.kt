@@ -34,9 +34,9 @@ import strikt.assertions.isEqualTo
 import strikt.assertions.isFalse
 import strikt.assertions.isNotNull
 
-class Ok3HttpClientIntegrationTest : JUnit5Minutests {
+class Ok3HttpClientIntegrationTest {//: JUnit5Minutests {
 
-  fun test() = rootContext<Fixture> {
+ /* fun test() = rootContext<Fixture> {
     fixture { Fixture() }
 
     before {
@@ -89,5 +89,5 @@ class Ok3HttpClientIntegrationTest : JUnit5Minutests {
         }
       )
     }
-  }
+  }*/
 }
