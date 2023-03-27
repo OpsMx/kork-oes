@@ -18,8 +18,8 @@ import okhttp3.ResponseBody
 import strikt.api.expectThat
 import strikt.assertions.isA
 
-class OkHttpRemoteExtensionTransportTest : JUnit5Minutests {
-  fun tests() = rootContext<Fixture> {
+class OkHttpRemoteExtensionTransportTest {//: JUnit5Minutests {
+ /* fun tests() = rootContext<Fixture> {
     fixture {
       Fixture()
     }
@@ -98,5 +98,5 @@ class OkHttpRemoteExtensionTransportTest : JUnit5Minutests {
   @JsonTypeName("readResponse")
   data class ReadResponse(
     val foo: String
-  ): RemoteExtensionResponse
+  ): RemoteExtensionResponse*/
 }

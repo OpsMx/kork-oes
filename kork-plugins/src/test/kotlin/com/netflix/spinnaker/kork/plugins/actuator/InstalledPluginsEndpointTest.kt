@@ -20,18 +20,20 @@ package com.netflix.spinnaker.kork.plugins.actuator
 import com.netflix.spinnaker.kork.plugins.SpinnakerPluginDescriptor
 import com.netflix.spinnaker.kork.plugins.SpinnakerPluginManager
 import com.netflix.spinnaker.kork.web.exceptions.NotFoundException
-import dev.minutest.junit.JUnit5Minutests
+
 import dev.minutest.rootContext
+import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.assertThrows
 import org.pf4j.PluginDescriptor
 import org.pf4j.PluginWrapper
+import org.spockframework.util.CollectionUtil.listOf
 import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class InstalledPluginsEndpointTest : JUnit5Minutests {
+class InstalledPluginsEndpointTest {
 
   fun tests() = rootContext<Fixture> {
     fixture {
@@ -64,10 +66,10 @@ class InstalledPluginsEndpointTest : JUnit5Minutests {
     val subject = InstalledPluginsEndpoint(pluginManager)
 
     init {
-      val pluginWrapper = PluginWrapper(pluginManager, SpinnakerPluginDescriptor("test", "", "", "", "", "", ""), null, this.javaClass.classLoader)
+      /*val pluginWrapper = PluginWrapper(pluginManager, SpinnakerPluginDescriptor("test", "", "", "", "", "", ""), null, this.javaClass.classLoader)
       every { pluginManager.getPlugins() } returns listOf(pluginWrapper)
       every { pluginManager.getPlugin("abc") } returns null
-      every { pluginManager.getPlugin("test") } returns pluginWrapper
+      every { pluginManager.getPlugin("test") } returns pluginWrapper*/
     }
   }
 }

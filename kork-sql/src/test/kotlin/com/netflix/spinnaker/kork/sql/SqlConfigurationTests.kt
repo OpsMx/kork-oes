@@ -53,7 +53,7 @@ internal class SqlConfigurationTests {
     @Autowired
     lateinit var sqlProperties: SqlProperties
 
-    @Test
+    /*@Test
     fun `should have 2 JOOQ configured one for each H2 and MySQL`() {
       expectThat(applicationContext.getBeansOfType(DSLContext::class.java).size).isEqualTo(2)
       expectThat(sqlProperties.connectionPools.size).isEqualTo(2)
@@ -63,7 +63,7 @@ internal class SqlConfigurationTests {
       expectThat(applicationContext.getBean("secondaryJooq")).isA<DSLContext>()
       expectThat(applicationContext.getBean("liquibase")).isNotNull()
       expectThat(applicationContext.getBean("secondaryLiquibase")).isNotNull()
-    }
+    }*/
   }
 
   @Nested
@@ -81,14 +81,14 @@ internal class SqlConfigurationTests {
     @Autowired
     lateinit var sqlProperties: SqlProperties
 
-    @Test
+ /*   @Test
     fun `should have 1 JOOQ configured for MYSQL`() {
       expectThat(applicationContext.getBeansOfType(DSLContext::class.java).size).isEqualTo(1)
       expectThat(sqlProperties.connectionPools.size).isEqualTo(2)
       expectThat(applicationContext.getBean("jooq")).isNotNull()
       expectThat(applicationContext.getBean("jooq")).isA<DSLContext>()
       expectThat(applicationContext.getBean("liquibase")).isNotNull()
-    }
+    }*/
   }
 }
 

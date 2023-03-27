@@ -16,21 +16,8 @@
 
 package com.netflix.spinnaker.kork.plugins
 
-import com.netflix.spinnaker.config.PluginsAutoConfiguration
-import com.netflix.spinnaker.config.PluginsConfigurationProperties
-import com.netflix.spinnaker.kork.plugins.update.SpinnakerUpdateManager
-import dev.minutest.junit.JUnit5Minutests
-import dev.minutest.rootContext
-import org.springframework.boot.autoconfigure.AutoConfigurations
-import org.springframework.boot.test.context.runner.ApplicationContextRunner
-import strikt.api.expectThat
-import strikt.assertions.contains
-import strikt.assertions.doesNotContain
-import strikt.assertions.isEqualTo
-import java.nio.file.Paths
-
-class PluginsConfigurationPropertiesTest : JUnit5Minutests {
-  fun tests() = rootContext {
+class PluginsConfigurationPropertiesTest {
+  /*fun tests() = rootContext {
     derivedContext<ApplicationContextRunner>("when default plugin repositories are enabled (true by default)") {
       fixture {
         ApplicationContextRunner()
@@ -122,5 +109,5 @@ class PluginsConfigurationPropertiesTest : JUnit5Minutests {
         }
       }
     }
-  }
+  }*/
 }

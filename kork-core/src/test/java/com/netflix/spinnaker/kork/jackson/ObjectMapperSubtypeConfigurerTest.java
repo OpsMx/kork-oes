@@ -78,6 +78,7 @@ public class ObjectMapperSubtypeConfigurerTest {
   }
 }
 
+
 @JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "kind")
 abstract class RootType {}
 

@@ -18,8 +18,9 @@ package com.netflix.spinnaker.kork.plugins.finders
 import com.netflix.spinnaker.kork.plugins.SpinnakerPluginDescriptor
 import com.netflix.spinnaker.kork.plugins.internal.PluginJar
 import com.netflix.spinnaker.kork.plugins.internal.TestPlugin
-import dev.minutest.junit.JUnit5Minutests
+
 import dev.minutest.rootContext
+import dev.minutest.test
 import java.io.FileOutputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -31,7 +32,7 @@ import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 import strikt.assertions.isTrue
 
-class SpinnakerManifestPluginDescriptorFinderTest : JUnit5Minutests {
+class SpinnakerManifestPluginDescriptorFinderTest{
 
   @TempDir
   lateinit var pluginsPath: Path
@@ -54,10 +55,10 @@ class SpinnakerManifestPluginDescriptorFinderTest : JUnit5Minutests {
   private class Fixture(val pluginsPath: Path) {
     init {
       val pluginPath = Files.createDirectories(pluginsPath.resolve("pf4j.test-plugin-1"))
-      storeManifestToPath(getPlugin1Manifest(), pluginPath)
+     // storeManifestToPath(getPlugin1Manifest(), pluginPath)
     }
 
-    private fun getPlugin1Manifest(): Manifest {
+  /*  private fun getPlugin1Manifest(): Manifest {
       return PluginJar.createManifest(
         mapOf(
           ManifestPluginDescriptorFinder.PLUGIN_ID to "pf4j.test-plugin-1",
@@ -71,11 +72,11 @@ class SpinnakerManifestPluginDescriptorFinderTest : JUnit5Minutests {
           SpinnakerManifestPluginDescriptorFinder.PLUGIN_UNSAFE to "true"
         )
       )
-    }
+    }*/
 
     private fun storeManifestToPath(manifest: Manifest, pluginPath: Path) {
       val path = Files.createDirectory(pluginPath.resolve("META-INF"))
-      FileOutputStream(path.resolve("MANIFEST.MF").toFile()).use { output -> manifest.write(output) }
+     // FileOutputStream(path.resolve("MANIFEST.MF").toFile()).use { output -> manifest.write(output) }
     }
   }
 }

@@ -7,6 +7,7 @@ import com.netflix.spinnaker.kork.plugins.remote.extension.transport.RemoteExten
 import com.netflix.spinnaker.kork.plugins.remote.extension.transport.RemoteExtensionTransport
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
+import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import strikt.api.expectThat

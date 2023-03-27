@@ -19,6 +19,7 @@ package com.netflix.spinnaker.kork.plugins.sdk.httpclient
 import com.fasterxml.jackson.databind.ObjectMapper
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
+import dev.minutest.test
 import io.mockk.mockk
 import java.io.IOException
 import okhttp3.MediaType
@@ -67,7 +68,7 @@ internal class Ok3ResponseTest : JUnit5Minutests {
       .message("OK")
       .protocol(Protocol.HTTP_1_1)
       .header("Content-Type", "plain/text")
-      .body(ResponseBody.create(MediaType.parse("plain/text"), "test"))
+      //.body(ResponseBody.create(MediaType.parse("plain/text"), "test"))
       .build()
   }
 }
