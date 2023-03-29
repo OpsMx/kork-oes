@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 package com.netflix.spinnaker.kork.plugins.bundle
-class PluginBundleExtractorTest {}
-/*
+
 import com.netflix.spinnaker.kork.exceptions.IntegrationException
 import com.netflix.spinnaker.kork.plugins.SpringStrictPluginLoaderStatusProvider
-
+import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import java.io.File
@@ -39,11 +37,12 @@ import strikt.api.expectThat
 import strikt.api.expectThrows
 import strikt.assertions.isTrue
 
-class PluginBundleExtractorTest {
+class PluginBundleExtractorTest : JUnit5Minutests {
+
   fun tests() = rootContext<PluginBundleExtractor> {
     fixture { PluginBundleExtractor(strictPluginLoaderStatusProvider) }
 
-    /*before {
+    before {
       // Creates 3 zips: Two service plugin zips, and then a bundle zip containing the service plugin zips
       val bundleDir = ZipBuilder.workspace.resolve("bundleSrc").also {
         try {
@@ -60,7 +59,7 @@ class PluginBundleExtractorTest {
 
     after {
       ZipBuilder.workspace.toFile().listFiles()?.forEach { it.deleteRecursively() }
-    }*/
+    }
 
     context("bundle extraction") {
       test("extracts bundles") {
@@ -115,7 +114,7 @@ class PluginBundleExtractorTest {
     private val destination: Path
   ) {
 
-    //private val fileList: MutableList<String> = mutableListOf()
+    private val fileList: MutableList<String> = mutableListOf()
 
     fun build() {
       generateFileList(sourceRootPath.toFile())
@@ -125,7 +124,7 @@ class PluginBundleExtractorTest {
         // Do nothing
       }
 
-    /*  FileOutputStream(destination.resolve(zipFilename).toString()).use { fos ->
+      FileOutputStream(destination.resolve(zipFilename).toString()).use { fos ->
         ZipOutputStream(fos).use { zos ->
           fileList.forEach { file ->
             val ze = ZipEntry(Paths.get(file).fileName.toString())
@@ -138,23 +137,23 @@ class PluginBundleExtractorTest {
 
           zos.closeEntry()
         }
-      }*/
+      }
     }
 
     fun generateFileList(node: File) {
       if (node.isFile) {
-       // fileList.add(generateZipEntry(node.toString()))
+        fileList.add(generateZipEntry(node.toString()))
       }
       if (node.isDirectory) {
-        /*node.list()?.forEach {
+        node.list()?.forEach {
           generateFileList(File(node, it))
-        }*/
+        }
       }
     }
 
-    /*private fun generateZipEntry(filePath: String): String {
-     return filePath.substring(sourceRootPath.toString().length + 1, filePath.length)
-    }*/
+    private fun generateZipEntry(filePath: String): String {
+      return filePath.substring(sourceRootPath.toString().length + 1, filePath.length)
+    }
 
     companion object {
       val workspace = Files.createTempDirectory("plugins")
@@ -164,6 +163,3 @@ class PluginBundleExtractorTest {
   private fun URL.toPath(): Path =
     File(this.toURI()).toPath()
 }
-
-
- */

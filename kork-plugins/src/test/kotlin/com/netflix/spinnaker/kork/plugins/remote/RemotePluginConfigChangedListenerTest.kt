@@ -1,6 +1,5 @@
 package com.netflix.spinnaker.kork.plugins.remote
-class RemotePluginConfigChangedListenerTest{}
-/*
+
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.netflix.spinnaker.config.okhttp3.OkHttpClientProvider
 import com.netflix.spinnaker.kork.api.plugins.remote.RemoteExtensionConfig
@@ -10,23 +9,20 @@ import com.netflix.spinnaker.kork.plugins.remote.extension.RemoteExtensionPointC
 import com.netflix.spinnaker.kork.plugins.remote.extension.RemoteExtensionPointDefinition
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
-import org.spockframework.util.CollectionUtil.listOf
 import org.springframework.beans.factory.ObjectProvider
 import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 import strikt.assertions.isNull
-import java.util.Collections.emptyList
 
 class RemotePluginConfigChangedListenerTest : JUnit5Minutests {
   fun tests() = rootContext<Fixture> {
     fixture {
       Fixture()
     }
-/*
+
     test("Enabled event instantiates remote plugin object and caches it") {
       subject.onApplicationEvent(enableEvent)
       val result = remotePluginsCache.get(enableEvent.pluginId)
@@ -48,7 +44,7 @@ class RemotePluginConfigChangedListenerTest : JUnit5Minutests {
       subject.onApplicationEvent(disableEvent)
       val result = remotePluginsCache.get(enableEvent.pluginId)
       expectThat(result).isNull()
-    }*/
+    }
   }
 
   private class Fixture {
@@ -58,7 +54,7 @@ class RemotePluginConfigChangedListenerTest : JUnit5Minutests {
     val okHttpClientProviderProvider: ObjectProvider<OkHttpClientProvider> = mockk(relaxed = true)
     val remotePluginsCache: RemotePluginsCache = RemotePluginsCache(mockk(relaxed = true))
 
-   /* val enableEvent = RemotePluginConfigChanged(
+    val enableEvent = RemotePluginConfigChanged(
       source = mockk(relaxed = true),
       status = RemotePluginConfigChanged.Status.ENABLED,
       pluginId = "netflix.remote1",
@@ -102,7 +98,7 @@ class RemotePluginConfigChangedListenerTest : JUnit5Minutests {
       )
     )
 
-      val disableEvent = RemotePluginConfigChanged(
+    val disableEvent = RemotePluginConfigChanged(
       source = mockk(relaxed = true),
       status = RemotePluginConfigChanged.Status.DISABLED,
       pluginId = "netflix.remote1",
@@ -123,10 +119,10 @@ class RemotePluginConfigChangedListenerTest : JUnit5Minutests {
         )
       )
     )
-*/
+
     val remoteExtensionPointDefinition: RemoteExtensionPointDefinition = object : RemoteExtensionPointDefinition {
       override fun type() = "type"
-     // override fun configType(): Class<out ConfigType> = ConfigType::class.java
+      override fun configType(): Class<out ConfigType> = ConfigType::class.java
     }
 
     val subject: RemotePluginConfigChangedListener = RemotePluginConfigChangedListener(
@@ -140,7 +136,7 @@ class RemotePluginConfigChangedListenerTest : JUnit5Minutests {
     init {
       every { objectMapperProvider.getObject() } returns objectMapper
       every { okHttpClientProviderProvider.getObject() } returns okHttpClientProvider
-    //  every { objectMapper.convertValue(any(), ConfigType::class.java) } returns ConfigType()
+      every { objectMapper.convertValue(any(), ConfigType::class.java) } returns ConfigType()
     }
   }
 
@@ -165,5 +161,3 @@ class RemotePluginConfigChangedListenerTest : JUnit5Minutests {
 
   }
 }
-
- */

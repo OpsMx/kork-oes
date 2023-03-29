@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 package com.netflix.spinnaker.kork.plugins.sdk
-class SerdeServiceImplTest{}
 
-/*
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.netflix.spinnaker.kork.plugins.sdk.serde.SerdeServiceImpl
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
@@ -32,7 +29,7 @@ class SerdeServiceImplTest : JUnit5Minutests {
     fixture {
       SerdeServiceImpl(ObjectMapper().registerKotlinModule())
     }
-   /* test("map to converts a hashmap to target type") {
+    test("map to converts a hashmap to target type") {
       val o = mapOf(
         "foo" to "hello",
         "bar" to 12
@@ -54,7 +51,7 @@ class SerdeServiceImplTest : JUnit5Minutests {
         get { foo }.isEqualTo("hello")
         get { bar }.isEqualTo(12)
       }
-    }*/
+    }
   }
 
   private class MyType(
@@ -62,6 +59,3 @@ class SerdeServiceImplTest : JUnit5Minutests {
     val bar: Int
   )
 }
-
-
- */

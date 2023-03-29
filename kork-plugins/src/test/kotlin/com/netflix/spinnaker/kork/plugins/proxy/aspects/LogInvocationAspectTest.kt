@@ -15,14 +15,12 @@
  */
 
 package com.netflix.spinnaker.kork.plugins.proxy.aspects
-class LogInvocationAspectTest{}
-/*
+
 import com.netflix.spinnaker.kork.common.Header
 import com.netflix.spinnaker.kork.plugins.SpinnakerPluginDescriptor
 import com.netflix.spinnaker.kork.plugins.api.internal.SpinnakerExtensionPoint
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import io.mockk.mockk
 import java.lang.reflect.Method
 import org.slf4j.MDC
@@ -37,7 +35,7 @@ class LogInvocationAspectTest : JUnit5Minutests {
   fun tests() = rootContext<Fixture> {
     fixture { Fixture() }
 
-  /*  test("creates LogInvocationState object with extension IDs") {
+    test("creates LogInvocationState object with extension IDs") {
       val state = subject.before(target, proxy, method, args, spinnakerPluginDescriptor)
       expectThat(state).isA<LogInvocationState>()
         .and {
@@ -62,7 +60,7 @@ class LogInvocationAspectTest : JUnit5Minutests {
 
       expectThat(MDC.get(Header.PLUGIN_ID.header)).isNull()
       expectThat(MDC.get(Header.PLUGIN_EXTENSION.header)).isNull()
-    }*/
+    }
   }
 
   private inner class Fixture {
@@ -77,6 +75,3 @@ class LogInvocationAspectTest : JUnit5Minutests {
     val spinnakerPluginDescriptor: SpinnakerPluginDescriptor = createPluginDescriptor(pluginId, pluginVersion)
   }
 }
-
-
- */

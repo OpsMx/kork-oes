@@ -15,11 +15,9 @@
  */
 
 package com.netflix.spinnaker.kork.plugins.finders
-class PluginRefPluginDescriptorFinderTests{}
-/*
+
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import java.nio.file.Path
 import java.nio.file.Paths
 import org.pf4j.PluginDescriptor
@@ -33,23 +31,20 @@ class PluginRefPluginDescriptorFinderTests : JUnit5Minutests {
   fun tests() = rootContext<Fixture> {
     fixture { Fixture() }
 
-   /* test("delegates isApplicable to internal chain") {
+    test("delegates isApplicable to internal chain") {
       expectThat(subject.isApplicable(pluginRefPath)).isTrue()
     }
 
     test("delegates find to internal chain") {
       // TODO(cf): implement .equals on SpinnakerPluginDescriptor that accounts for lack of equals on DefaultPluginDescriptor..
       expectThat(subject.find(pluginRefPath)).isEqualTo(expectedDescriptor)
-    }*/
+    }
   }
 
   private inner class Fixture {
-//    val expectedDescriptor: PluginDescriptor = SpinnakerPropertiesPluginDescriptorFinder().find(Paths.get(javaClass.getResource("/testplugin/plugin.properties").toURI()).parent)
-//    val pluginRefPath: Path = Paths.get(javaClass.getResource("/test.plugin-ref").toURI())
+    val expectedDescriptor: PluginDescriptor = SpinnakerPropertiesPluginDescriptorFinder().find(Paths.get(javaClass.getResource("/testplugin/plugin.properties").toURI()).parent)
+    val pluginRefPath: Path = Paths.get(javaClass.getResource("/test.plugin-ref").toURI())
     val finder: PluginDescriptorFinder = SpinnakerPropertiesPluginDescriptorFinder()
     val subject = PluginRefPluginDescriptorFinder(finder)
   }
 }
-
-
- */

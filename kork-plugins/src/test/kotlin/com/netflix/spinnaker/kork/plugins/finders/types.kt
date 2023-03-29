@@ -18,7 +18,7 @@ package com.netflix.spinnaker.kork.plugins.finders
 import org.pf4j.DefaultPluginDescriptor
 import org.pf4j.Plugin
 
-/*internal val pluginDescriptor = DefaultPluginDescriptor(
+internal val pluginDescriptor = DefaultPluginDescriptor(
   "netflix/sentient-robot",
   "You pass the butter",
   Plugin::class.java.name,
@@ -26,4 +26,4 @@ import org.pf4j.Plugin
   "*",
   "Netflix",
   "Apache 2.0"
-)*/
+)

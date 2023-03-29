@@ -15,20 +15,17 @@
  */
 package com.netflix.spinnaker.kork.plugins.update.downloader
 
-class Front50FileDownloaderTest{}
-/*
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import java.net.URL
 import okhttp3.Call
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.ResponseBody
-
 import strikt.api.expect
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -42,15 +39,15 @@ class Front50FileDownloaderTest : JUnit5Minutests {
       Fixture()
     }
 
-   /* test("files are downloaded to a temp directory") {
+    test("files are downloaded to a temp directory") {
       every { response.isSuccessful } returns true
-      every { response.code() } returns 200
-      every { response.body() } returns ResponseBody.create(MediaType.parse("application/zip"), "oh hi")
+      every { response.code } returns 200
+      every { response.body } returns ResponseBody.create("application/zip".toMediaTypeOrNull(), "oh hi")
 
       expectThat(subject.downloadFile(URL("http://front50.com/myplugin.zip"))) {
         get { toFile().readText() }.isEqualTo("oh hi")
       }
-    }*/
+    }
 
     test("supports files from front50") {
       expect {
@@ -73,6 +70,3 @@ class Front50FileDownloaderTest : JUnit5Minutests {
     }
   }
 }
-
-
- */

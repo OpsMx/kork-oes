@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 package com.netflix.spinnaker.kork.plugins.sdk.httpclient
-class Ok3HttpClientTest{}
-/*
+
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.netflix.spinnaker.kork.exceptions.IntegrationException
 import com.netflix.spinnaker.kork.plugins.api.httpclient.Request
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import okhttp3.Call
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
 import okhttp3.Response
@@ -35,7 +34,6 @@ import strikt.api.expectThrows
 import strikt.assertions.containsKey
 import strikt.assertions.isEqualTo
 import strikt.assertions.message
-import java.util.*
 
 class Ok3HttpClientTest : JUnit5Minutests {
 
@@ -44,7 +42,7 @@ class Ok3HttpClientTest : JUnit5Minutests {
       Fixture()
     }
 
-   /* test("responses are mapped to sdk model") {
+    test("responses are mapped to sdk model") {
       val call: Call = mockk(relaxed = true)
       val response = Response.Builder()
         .request(mockk(relaxed = true))
@@ -52,7 +50,7 @@ class Ok3HttpClientTest : JUnit5Minutests {
         .code(200)
         .message("OK")
         .header("Content-Type", "plain/text")
-        .body(ResponseBody.create(MediaType.parse("plain/text"), "hi"))
+        .body(ResponseBody.create("plain/text".toMediaTypeOrNull(), "hi"))
         .build()
 
       every { okHttpClient.newCall(any()) } returns call
@@ -64,7 +62,7 @@ class Ok3HttpClientTest : JUnit5Minutests {
         get { statusCode }.isEqualTo(200)
         get { headers }.containsKey("content-type")
       }
-    }*/
+    }
 
     test("Invalid URL") {
       val request = Request("hello", "/")
@@ -84,6 +82,3 @@ class Ok3HttpClientTest : JUnit5Minutests {
     val invalidSubject = Ok3HttpClient("foo", "smtp://example.net", okHttpClient, objectMapper)
   }
 }
-
-
- */

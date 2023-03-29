@@ -11,6 +11,7 @@ import dev.minutest.rootContext
 import io.mockk.every
 import io.mockk.mockk
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
 import okhttp3.Response
@@ -18,8 +19,8 @@ import okhttp3.ResponseBody
 import strikt.api.expectThat
 import strikt.assertions.isA
 
-class OkHttpRemoteExtensionTransportTest {//: JUnit5Minutests {
- /* fun tests() = rootContext<Fixture> {
+class OkHttpRemoteExtensionTransportTest : JUnit5Minutests {
+  fun tests() = rootContext<Fixture> {
     fixture {
       Fixture()
     }
@@ -31,7 +32,7 @@ class OkHttpRemoteExtensionTransportTest {//: JUnit5Minutests {
         .code(200)
         .message("OK")
         .header("Content-Type", "application/json")
-        .body(ResponseBody.create(MediaType.parse("application/json"), "{\"type\": \"readResponse\", \"foo\": \"bar\"}"))
+        .body(ResponseBody.create("application/json".toMediaTypeOrNull(), "{\"type\": \"readResponse\", \"foo\": \"bar\"}"))
         .build()
 
       every { client.newCall(any()).execute() } returns response
@@ -47,7 +48,7 @@ class OkHttpRemoteExtensionTransportTest {//: JUnit5Minutests {
         .code(201)
         .message("OK")
         .header("Content-Type", "application/json")
-        .body(ResponseBody.create(MediaType.parse("application/json"), "{\"type\": \"writeResponse\", \"foo\": \"bar\"}"))
+        .body(ResponseBody.create("application/json".toMediaTypeOrNull(), "{\"type\": \"writeResponse\", \"foo\": \"bar\"}"))
         .build()
 
       every { client.newCall(any()).execute() } returns response
@@ -98,5 +99,5 @@ class OkHttpRemoteExtensionTransportTest {//: JUnit5Minutests {
   @JsonTypeName("readResponse")
   data class ReadResponse(
     val foo: String
-  ): RemoteExtensionResponse*/
+  ): RemoteExtensionResponse
 }

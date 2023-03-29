@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 package com.netflix.spinnaker.kork.plugins.sdk.httpclient
-class Ok3HttpClientRegistryTest{}
-/*
+
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.netflix.spinnaker.config.OkHttp3ClientConfiguration
 import com.netflix.spinnaker.kork.exceptions.IntegrationException
 import com.netflix.spinnaker.kork.plugins.api.httpclient.HttpClientConfig
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkClass
 import io.mockk.verify
 import okhttp3.OkHttpClient
-import org.spockframework.util.CollectionUtil.listOf
 import org.springframework.core.env.Environment
 import strikt.api.expectThat
 import strikt.api.expectThrows
@@ -135,6 +132,3 @@ class Ok3HttpClientRegistryTest : JUnit5Minutests {
     }
   }
 }
-
-
- */

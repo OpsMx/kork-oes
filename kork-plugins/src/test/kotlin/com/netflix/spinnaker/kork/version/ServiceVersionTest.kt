@@ -15,15 +15,11 @@
  */
 
 package com.netflix.spinnaker.kork.version
-class ServiceVersionTest{}
 
-/*
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
-import org.spockframework.util.CollectionUtil.listOf
 import org.springframework.context.ApplicationContext
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -73,5 +69,3 @@ class ServiceVersionTest : JUnit5Minutests {
     }
   }
 }
-
- */

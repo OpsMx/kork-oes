@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 package com.netflix.spinnaker.kork.plugins.v2.scenarios
-class ServiceDependenciesScenarioTest{}
-/*
+
 import com.netflix.spinnaker.config.PluginsAutoConfiguration
 import com.netflix.spinnaker.kork.plugins.FRAMEWORK_V2
 import com.netflix.spinnaker.kork.plugins.testplugin.testPlugin
@@ -24,7 +23,6 @@ import com.netflix.spinnaker.kork.plugins.v2.enablePlugin
 import com.netflix.spinnaker.kork.plugins.v2.scenarios.fixtures.ParentServiceBean
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import org.springframework.boot.autoconfigure.AutoConfigurations
 import org.springframework.boot.test.context.assertj.AssertableApplicationContext
 import org.springframework.boot.test.context.runner.ApplicationContextRunner
@@ -37,9 +35,9 @@ import strikt.assertions.isNotNull
 /**
  * Tests that beans created by the service are injectable into plugin extensions.
  */
-class ServiceDependenciesScenarioTest {//: JUnit5Minutests {
+class ServiceDependenciesScenarioTest : JUnit5Minutests {
 
- /* fun tests() = rootContext<Fixture> {
+  fun tests() = rootContext<Fixture> {
     fixture {
       Fixture()
     }
@@ -60,9 +58,9 @@ class ServiceDependenciesScenarioTest {//: JUnit5Minutests {
             }.isEqualTo(serviceBean)
         }
     }
-  }*/
+  }
 
- /* private inner class Fixture {
+  private inner class Fixture {
     val generated = GENERATED
     val app = ApplicationContextRunner()
       .withPropertyValues(
@@ -76,13 +74,13 @@ class ServiceDependenciesScenarioTest {//: JUnit5Minutests {
         )
       )
       .enablePlugin(generated.plugin.pluginId)
-  }*/
+  }
 
   @Configuration
   @ComponentScan("com.netflix.spinnaker.kork.plugins.v2.scenarios.fixtures")
   private class TestApplicationConfiguration
 
-  /*companion object {
+  companion object {
     private val GENERATED = testPlugin {
       sourceFile(
         "MyExtension",
@@ -103,8 +101,5 @@ class ServiceDependenciesScenarioTest {//: JUnit5Minutests {
         """.trimIndent()
       )
     }.run { generate() }
-  }*/
+  }
 }
-
-
- */

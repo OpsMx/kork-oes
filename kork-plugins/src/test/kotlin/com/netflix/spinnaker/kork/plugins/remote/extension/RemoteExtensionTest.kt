@@ -1,14 +1,12 @@
 package com.netflix.spinnaker.kork.plugins.remote.extension
 
-class RemoteExtensionTest{}
-/*
+
 import com.netflix.spinnaker.kork.plugins.remote.extension.transport.RemoteExtensionPayload
 import com.netflix.spinnaker.kork.plugins.remote.extension.transport.RemoteExtensionQuery
 import com.netflix.spinnaker.kork.plugins.remote.extension.transport.RemoteExtensionResponse
 import com.netflix.spinnaker.kork.plugins.remote.extension.transport.RemoteExtensionTransport
 import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import io.mockk.every
 import io.mockk.mockk
 import strikt.api.expectThat
@@ -65,6 +63,3 @@ class RemoteExtensionTest : JUnit5Minutests {
   private class WriteResponse: RemoteExtensionResponse
   private class ReadResponse: RemoteExtensionResponse
 }
-
-
- */
