@@ -29,6 +29,7 @@ dependencies {
   implementation "org.springframework.boot:spring-boot-starter-actuator"
   implementation("com.google.guava:guava")
   implementation "javax.inject:javax.inject:1"
+  implementation "com.guicedee.services:javax.inject:1.1.1.1-SP1"
 
   implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
   implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-properties")

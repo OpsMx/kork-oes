@@ -15,13 +15,36 @@
  */
 package com.netflix.spinnaker.kork.sql
 
+
+import com.netflix.spinnaker.kork.PlatformComponents
+import com.netflix.spinnaker.kork.sql.config.DefaultSqlConfiguration
+import com.netflix.spinnaker.kork.sql.health.SqlHealthIndicator
 import org.jooq.DSLContext
+import org.jooq.impl.DSL.field
+import org.jooq.impl.DSL.table
+import org.junit.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.getBeansOfType
 import org.springframework.boot.actuate.health.HealthIndicator
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.ApplicationContext
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig
+import strikt.api.expectThat
+import strikt.assertions.isA
+import strikt.assertions.isEqualTo
+import strikt.assertions.isNotNull
 
+/*
+With Junit 5, we do not need @RunWith(SpringRunner.class) anymore.
+ Spring tests are executed with @ExtendWith(SpringExtension.class)
+ and @SpringBootTest and the other @…Test annotations are already annotated with it.
+ */
 //@RunWith(SpringRunner::class)
 @SpringBootTest(
   classes = [StartupTestApp::class],
@@ -44,7 +67,7 @@ internal class SpringStartupTests {
   @Autowired
   lateinit var applicationContext: ApplicationContext
 
- /* @Test
+ /*@Test
   fun `uses SqlHealthIndicator`() {
     expectThat(dbHealthIndicator).isA<SqlHealthIndicator>()
 
@@ -61,5 +84,6 @@ internal class SpringStartupTests {
 }
 
 @SpringBootApplication
-//@Import(PlatformComponents::class, DefaultSqlConfiguration::class)
+@Import(PlatformComponents::class, DefaultSqlConfiguration::class)
 internal class StartupTestApp
+

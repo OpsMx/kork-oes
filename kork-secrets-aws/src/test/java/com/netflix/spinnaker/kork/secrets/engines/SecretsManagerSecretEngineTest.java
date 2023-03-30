@@ -61,11 +61,8 @@ public class SecretsManagerSecretEngineTest {
       new GetSecretValueResult().withSecretBinary(ByteBuffer.wrap("i'm binary".getBytes()));
   private GetSecretValueResult secretStringFileValue =
       new GetSecretValueResult().withSecretString("BEGIN RSA PRIVATE KEY");
-  /*
-   *
-   * @Rule public ExpectedException exceptionRule = ExpectedException.none();
-   */
 
+  /*@Rule public ExpectedException exceptionRule = ExpectedException.none();*/
   @BeforeEach
   public void setup() {
     ObjectMapper mapper = new ObjectMapper();

@@ -32,18 +32,22 @@ class WebEnvironmentTest {
 
   @Autowired TestRestTemplate restTemplate;
 
-  /*
-   * @Test void testTomcatWithIllegalHttpHeaders() throws Exception { HttpHeaders headers = new
-   * HttpHeaders(); // this is enough to cause a BAD_REQUEST if tomcat has rejectIllegalHeaders // set
-   * to true headers.add("X-Dum@my", "foo");
-   *
-   * URI uri =
-   * UriComponentsBuilder.fromHttpUrl("http://localhost/test-controller").port(port).build().toUri();
-   *
-   * ResponseEntity<String> entity = restTemplate.exchange(uri, HttpMethod.GET, new
-   * HttpEntity<>(headers), String.class); Assertions.assertEquals(HttpStatus.OK,
-   * entity.getStatusCode()); }
-   */
+  /*@Test
+  void testTomcatWithIllegalHttpHeaders() throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    // this is enough to cause a BAD_REQUEST if tomcat has rejectIllegalHeaders
+    headers.add("X-Dum@my", "foo");
+
+    URI uri =
+        UriComponentsBuilder.fromHttpUrl("http://localhost/test-controller")
+            .port(port)
+            .build()
+            .toUri();
+
+    ResponseEntity<String> entity =
+        restTemplate.exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), String.class);
+    assertEquals(HttpStatus.OK, entity.getStatusCode());
+  }*/
 
   @SpringBootApplication
   public static class TestControllerConfiguration {

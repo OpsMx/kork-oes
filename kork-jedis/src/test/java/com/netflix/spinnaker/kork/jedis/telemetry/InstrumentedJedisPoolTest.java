@@ -16,6 +16,7 @@
 
 package com.netflix.spinnaker.kork.jedis.telemetry;
 
+// import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 import com.netflix.spectator.api.Registry;

@@ -34,7 +34,7 @@ class ErrorConfiguration {
   ErrorAttributes errorAttributes() {
     final DefaultErrorAttributes defaultErrorAttributes = new DefaultErrorAttributes()
     return new ErrorAttributes() {
-
+      //@Override
       Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
         // By default, Spring echoes back the user's requested path. This opens up a potential XSS vulnerability where a
         // user, for example, requests "GET /<script>alert('Hi')</script> HTTP/1.1".

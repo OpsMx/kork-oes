@@ -55,7 +55,9 @@ public class SwaggerConfig {
   public Docket gateApi() {
     return new Docket(DocumentationType.SWAGGER_2)
         .select()
-        .paths(PathSelectors.regex("/api.*"))
+        .paths(
+            PathSelectors.regex(
+                "/api.*")) // .pathProvider(new BasePathProvider(basePath, documentationPath))
         .apis(RequestHandlerSelectors.any())
         .paths(paths())
         .build()
@@ -126,7 +128,7 @@ public class SwaggerConfig {
     return documentationPath;
   }
 
-  public class BasePathProvider extends DefaultPathProvider {
+  public class BasePathProvider extends DefaultPathProvider { // extends AbstractPathProvider {
     private String basePath;
     private String documentationPath;
 
@@ -135,6 +137,7 @@ public class SwaggerConfig {
       this.documentationPath = documentationPath;
     }
 
+    // @Override
     protected String applicationPath() {
       return basePath;
     }

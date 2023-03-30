@@ -15,22 +15,15 @@
  */
 package com.netflix.spinnaker.kork.jackson;
 
-// import static org.junit.Assert.assertEquals;//commented for PR3 porting
-
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-// import com.fasterxml.jackson.core.JsonProcessingException; //commented for PR3 porting
 import com.fasterxml.jackson.databind.ObjectMapper;
-// import com.netflix.spinnaker.kork.jackson.ObjectMapperSubtypeConfigurer.ClassSubtypeLocator;
-// //commented for PR3 porting
-// import com.netflix.spinnaker.kork.jackson.ObjectMapperSubtypeConfigurer.StringSubtypeLocator;
-// //commented for PR3 porting
+import com.netflix.spinnaker.kork.jackson.ObjectMapperSubtypeConfigurer.ClassSubtypeLocator;
 import java.util.ArrayList;
 import java.util.List;
-// import org.junit.Before;
-// import org.junit.Test;
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 
 public class ObjectMapperSubtypeConfigurerTest {
@@ -43,17 +36,15 @@ public class ObjectMapperSubtypeConfigurerTest {
     mapper = new ObjectMapper();
   }
 
-  /*
-  //commented for PR3 porting
-  @Test
+  /* @Test
   public void shouldRegisterSubtypesByClass() throws JsonProcessingException {
     new ObjectMapperSubtypeConfigurer(true)
         .registerSubtype(mapper, new ClassSubtypeLocator(RootType.class, searchPackages()));
 
     assertEquals("{\"kind\":\"child\"}", mapper.writeValueAsString(new ChildType()));
-  }
+  }*/
 
-  @Test
+  /*@Test
   public void shouldRegisterSubtypesByName() throws JsonProcessingException {
     new ObjectMapperSubtypeConfigurer(true)
         .registerSubtype(
@@ -62,7 +53,7 @@ public class ObjectMapperSubtypeConfigurerTest {
                 "com.netflix.spinnaker.kork.jackson.RootType", searchPackages()));
 
     assertEquals("{\"kind\":\"child\"}", mapper.writeValueAsString(new ChildType()));
-  }
+  }*/
 
   @Test(expected = InvalidSubtypeConfigurationException.class)
   public void shouldThrowWhenSubtypeNameIsUndefined() {
@@ -70,7 +61,6 @@ public class ObjectMapperSubtypeConfigurerTest {
         .registerSubtype(
             mapper, new ClassSubtypeLocator(UndefinedRootType.class, searchPackages()));
   }
-  */
 
   List<String> searchPackages() {
     List<String> searchPackages = new ArrayList<>();

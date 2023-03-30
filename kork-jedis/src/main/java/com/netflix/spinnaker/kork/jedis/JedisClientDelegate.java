@@ -75,7 +75,7 @@ public class JedisClientDelegate implements RedisClientDelegate {
       f.accept(transaction);
       transaction.exec();
     }
-  }v*/
+  }*/
 
   @Override
   public <R> R withBinaryClient(Function<JedisBinaryCommands, R> f) {

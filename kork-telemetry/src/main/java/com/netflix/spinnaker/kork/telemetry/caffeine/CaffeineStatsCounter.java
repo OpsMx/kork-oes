@@ -73,7 +73,9 @@ public class CaffeineStatsCounter implements StatsCounter {
   }
 
   @Override
-  public void recordEviction(@NonNegative int weight, RemovalCause cause) {}
+  public void recordEviction(@NonNegative int weight, RemovalCause cause) {
+    recordEviction(1);
+  }
 
   // @Override
   @SuppressWarnings("deprecation")
@@ -89,6 +91,7 @@ public class CaffeineStatsCounter implements StatsCounter {
 
   @Override
   public CacheStats snapshot() {
+    // return new CacheStats(
     return CacheStats.of(
         hitCount.count(),
         missCount.count(),

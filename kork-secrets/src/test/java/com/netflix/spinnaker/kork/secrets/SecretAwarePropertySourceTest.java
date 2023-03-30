@@ -1,6 +1,8 @@
 package com.netflix.spinnaker.kork.secrets;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -88,10 +90,20 @@ public class SecretAwarePropertySourceTest {
     verify(secretManager, never()).decryptAsFile(any());
     assertEquals(testValues.get(notSecretKey), returnedValue);
   }
-  /*
-   * @Test public void noSecretManagerShouldThrowException() {
-   * secretAwarePropertySource.setSecretManager(null); thrown.expect(SecretException.class);
-   * thrown.expectMessage("No secret manager to decrypt value of testSecretString");
-   * secretAwarePropertySource.getProperty("testSecretString"); }
-   */
+
+  @Test
+  public void noSecretManagerShouldThrowException() {
+    secretAwarePropertySource.setSecretManager(null);
+
+    /* thrown.expect(SecretException.class);
+    thrown.expectMessage("No secret manager to decrypt value of testSecretString");
+     secretAwarePropertySource.getProperty("testSecretString");*/
+    SecretException thrown =
+        assertThrows(
+            SecretException.class,
+            () -> secretAwarePropertySource.getProperty("testSecretString"),
+            "Expected doThing() to throw, but it didn't");
+
+    assertTrue(thrown.getMessage().contentEquals("Expected doThing() to throw, but it didn't"));
+  }
 }

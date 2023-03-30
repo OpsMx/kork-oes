@@ -16,28 +16,28 @@
 
 package com.netflix.spinnaker.kork.secrets.engines;
 
-// import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-// import com.amazonaws.services.secretsmanager.AWSSecretsManager;
+import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
-// import com.amazonaws.services.secretsmanager.model.CreateSecretRequest;
+import com.amazonaws.services.secretsmanager.model.CreateSecretRequest;
 import com.amazonaws.services.secretsmanager.model.Tag;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.spinnaker.kork.secrets.SecretConfiguration;
-// import com.netflix.spinnaker.kork.secrets.user.OpaqueUserSecretData;
-// import com.netflix.spinnaker.kork.secrets.user.UserSecret;
-// import com.netflix.spinnaker.kork.secrets.user.UserSecretData;
+import com.netflix.spinnaker.kork.secrets.user.OpaqueUserSecretData;
+import com.netflix.spinnaker.kork.secrets.user.UserSecret;
+import com.netflix.spinnaker.kork.secrets.user.UserSecretData;
 import com.netflix.spinnaker.kork.secrets.user.UserSecretManager;
 import com.netflix.spinnaker.kork.secrets.user.UserSecretMetadata;
 import com.netflix.spinnaker.kork.secrets.user.UserSecretMetadataField;
-// import com.netflix.spinnaker.kork.secrets.user.UserSecretReference;
-// import com.netflix.spinnaker.kork.secrets.user.UserSecretSerde;
+import com.netflix.spinnaker.kork.secrets.user.UserSecretReference;
+import com.netflix.spinnaker.kork.secrets.user.UserSecretSerde;
 import com.netflix.spinnaker.kork.secrets.user.UserSecretSerdeFactory;
-// import java.nio.ByteBuffer;
+import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.List;
-// import java.util.Map;
-// import org.junit.jupiter.api.Test;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -55,8 +55,6 @@ public class SecretsManagerSecretEngineIntegrationTest {
 
   @Autowired private UserSecretManager userSecretManager;
 
-  /*
-  //commented for PR3 porting
   @Test
   public void canDecryptUserSecret() {
     AWSSecretsManager client =
@@ -94,7 +92,6 @@ public class SecretsManagerSecretEngineIntegrationTest {
     assertEquals(metadata.getRoles(), userSecret.getRoles());
     secretMap.forEach((key, value) -> assertEquals(value, userSecret.getSecretString(key)));
   }
-  */
 
   private static Collection<Tag> tagsForMetadata(UserSecretMetadata metadata) {
     return List.of(

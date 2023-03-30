@@ -16,24 +16,16 @@
 
 package com.netflix.spinnaker.kork.configserver;
 
-/*//commented: for PR3 porting
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.junit.jupiter.api.Test; */
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 public class ConfigServerBootstrapTest {
-  /*
-  //commented: for PR3 porting
-  @Test
+
+  /*@Test
   public void testConfigServerContextLoads() {
     String dummyUserHome = "/foo/bar";
     assertTrue(Files.notExists(Paths.get(dummyUserHome)));
     ConfigServerTestApplication.execute(dummyUserHome);
-  } */
-
+  }*/
 }

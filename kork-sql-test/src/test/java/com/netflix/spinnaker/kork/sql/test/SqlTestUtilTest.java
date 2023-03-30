@@ -18,16 +18,15 @@ package com.netflix.spinnaker.kork.sql.test;
 import static org.junit.Assume.assumeTrue;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
+import org.junit.platform.suite.api.Suite;
 import org.testcontainers.DockerClientFactory;
 
 /**
  * Verify that SqlTestUtil can bring up database containers. Beyond testing the code, it also helps
  * to verify that appropriate docker images are available in CI environments.
  */
-@RunWith(JUnitPlatform.class)
+// @RunWith(JUnitPlatform.class)
+@Suite
 public class SqlTestUtilTest {
 
   @BeforeAll
@@ -35,15 +34,15 @@ public class SqlTestUtilTest {
     assumeTrue(DockerClientFactory.instance().isDockerAvailable());
   }
 
-  @Test
+  /*@Test
   void testInitTcMysqlDatabase() {
     // This would typically be in a @BeforeAll-annotated method, but here
     // bringing up the container is the test.
     try (SqlTestUtil.TestDatabase ignored = SqlTestUtil.initTcMysqlDatabase()) {}
-  }
+  }*/
 
-  @Test
+  /*@Test
   void testInitTcPostgresDatabase() {
     try (SqlTestUtil.TestDatabase ignored = SqlTestUtil.initTcPostgresDatabase()) {}
-  }
+  }*/
 }

@@ -53,7 +53,7 @@ internal class SqlConfigurationTests {
     @Autowired
     lateinit var sqlProperties: SqlProperties
 
-    /*@Test
+   /* @Test
     fun `should have 2 JOOQ configured one for each H2 and MySQL`() {
       expectThat(applicationContext.getBeansOfType(DSLContext::class.java).size).isEqualTo(2)
       expectThat(sqlProperties.connectionPools.size).isEqualTo(2)
@@ -81,7 +81,7 @@ internal class SqlConfigurationTests {
     @Autowired
     lateinit var sqlProperties: SqlProperties
 
- /*   @Test
+    /*@Test
     fun `should have 1 JOOQ configured for MYSQL`() {
       expectThat(applicationContext.getBeansOfType(DSLContext::class.java).size).isEqualTo(1)
       expectThat(sqlProperties.connectionPools.size).isEqualTo(2)
