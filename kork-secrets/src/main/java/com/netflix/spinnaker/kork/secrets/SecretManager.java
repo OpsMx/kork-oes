@@ -32,7 +32,7 @@ public class SecretManager {
   @Getter private final SecretEngineRegistry secretEngineRegistry;
 
   @Autowired
-  SecretManager(SecretEngineRegistry secretEngineRegistry) {
+  public SecretManager(SecretEngineRegistry secretEngineRegistry) {
     this.secretEngineRegistry = secretEngineRegistry;
   }
 

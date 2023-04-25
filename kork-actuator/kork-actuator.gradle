@@ -30,8 +30,8 @@ dependencies {
   testImplementation "org.spockframework:spock-core"
   testImplementation "org.spockframework:spock-spring"
   testImplementation "org.springframework.boot:spring-boot-starter-test"
-  testRuntimeOnly "cglib:cglib-nodep"
-  testRuntimeOnly "org.objenesis:objenesis"
+  testRuntimeOnly "cglib:cglib-nodep:3.3.0"
+  testRuntimeOnly "org.objenesis:objenesis:2.5.1"
 
 
   //Need to delete at end:added for PR3 porting - may not be needed after updating spinnaker-gradle dependencies, start
