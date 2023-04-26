@@ -30,8 +30,8 @@ ext {
     spek2            : "2.0.9",
     springBoot       : "3.0.0",
     springCloud      : "2022.0.2",
-    springfoxSwagger : "2.9.2",
-    swagger          : "1.5.20", //this should stay in sync with what springfoxSwagger expects
+    springfoxSwagger : "3.0.0",//"2.9.2",
+    //swagger          : "1.5.20", //this should stay in sync with what springfoxSwagger expects
 
     // Spring boot 2.4.13 brings in 9.0.55.  Spring boot 2.5.14 brings in
     // 9.0.63.  Use 9.0.69 to resolve CVE-2022-42252 and CVE-2022-45143.  Spring
@@ -122,10 +122,13 @@ dependencies {
   api("com.netflix.spectator:spectator-reg-atlas:${versions.spectator}")
   api("com.netflix.spectator:spectator-web-spring:${versions.spectator}")
   api("com.netflix.spectator:spectator-reg-micrometer:${versions.spectator}")
-  api("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger}")
+
+  api ("io.springfox:springfox-boot-starter:3.0.0")
+
+/*  api("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger}")
   api("io.springfox:springfox-swagger2:${versions.springfoxSwagger}")
   api("org.springdoc:springdoc-openapi-webmvc-core:${versions.openapi}")
-  api("org.springdoc:springdoc-openapi-kotlin:${versions.openapi}")
+  api("org.springdoc:springdoc-openapi-kotlin:${versions.openapi}") */
 
   /*constraints {
     api("cglib:cglib-nodep:3.3.0")

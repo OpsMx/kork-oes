@@ -34,15 +34,22 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class MetricsEndpointConfiguration {
 
+  /*
+   * TODO : CVE fixes:12Apr23:Sheetal:Need to check and uncomment below method if rosco DEBUG log shows
+   *  any message related to AnonymousAuthenticationFilter
+   */
   @Bean
   public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(
         (requests) ->
             requests
-                .requestMatchers(new AntPathRequestMatcher("/spectator/metrics"))
+                .requestMatchers(
+                    new AntPathRequestMatcher("/spectator/metrics"),
+                    new AntPathRequestMatcher("/health"))
                 .permitAll()
                 .anyRequest()
                 .authenticated());
+    // http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
     return http.build();
   }
 }
