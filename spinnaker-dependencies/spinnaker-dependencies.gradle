@@ -8,7 +8,7 @@ javaPlatform {
 ext {
   versions = [
     arrow            : "0.13.2",
-    aws              : "1.12.411", //aws              : "1.12.176", //changed version for PR3 porting
+    aws              : "1.12.261", //aws              : "1.12.176", //changed version for PR3 porting
     bouncycastle     : "1.70",
     brave            : "5.14.1",//5.12.3",
     gcp              : "25.3.0",
@@ -108,6 +108,11 @@ dependencies {
   api("com.netflix.spectator:spectator-ext-jvm:1.5.4")
   api("com.github.ben-manes.caffeine:caffeine:3.1.5")
   api("com.netflix.spectator:spectator-ext-gc:1.5.4")
+  api("net.minidev:json-smart:2.4.9")
+  api("org.apache.tomcat.embed:tomcat-embed-core:9.0.69")
+  api("org.yaml:snakeyaml:2.0")
+  api("com.google.api-client:google-api-client:2.2.0")
+  api("com.google.http-client:google-http-client-jackson2:1.41.7")
 
   api("com.netflix.spectator:spectator-api:${versions.spectator}")
   api("com.netflix.spectator:spectator-ext-aws:${versions.spectator}")
