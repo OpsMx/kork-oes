@@ -25,7 +25,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @ConditionalOnClass(Registry.class)
@@ -36,13 +35,12 @@ public class MetricsEndpointConfiguration {
 
   @Bean
   public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(
-        (requests) ->
-            requests
-                .requestMatchers(new AntPathRequestMatcher("/spectator/metrics"))
-                .permitAll()
-                .anyRequest()
-                .permitAll());
+    http.securityMatcher("/spectator/metrics");
+    http.authorizeHttpRequests()
+        .requestMatchers("/spectator/metrics")
+        .permitAll()
+        .anyRequest()
+        .authenticated();
     return http.build();
   }
 }
