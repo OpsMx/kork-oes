@@ -23,7 +23,7 @@ public class ConfigServerBootstrap {
     // of https://github.com/spring-cloud/spring-cloud-commons/issues/466
     defaultSystemProperty(
         "spring.cloud.bootstrap.location",
-        "optional:classpath:/,optional:classpath:/config/,optional:file:./,optional:file:./config/,optional:/opt/spinnaker/config/,optional:${user.home}/.spinnaker/");
+        "optional:/opt/spinnaker/config/,optional:${user.home}/.spinnaker/,optional:classpath:/,optional:classpath:/config/,optional:file:./,optional:file:./config/");
     defaultSystemProperty(
         "spring.cloud.bootstrap.name", "spinnakerconfig,${spring.application.name}config");
     defaultSystemProperty("spring.cloud.config.server.bootstrap", "true");
