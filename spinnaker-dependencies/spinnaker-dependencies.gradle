@@ -146,6 +146,7 @@ dependencies {
     api("com.google.api-client:google-api-client:1.31.1") // TODO: Track update for CVE-2020-7692, reanalysis pending.
     api("cglib:cglib-nodep:3.3.0")
     api("com.jcraft:jsch.agentproxy.connector-factory:${versions.jschAgentProxy}")
+    api("com.nhaarman:mockito-kotlin:1.6.0")
   }
 
   /*constraints {
@@ -187,7 +188,6 @@ dependencies {
     api("com.nimbusds:nimbus-jose-jwt:7.9")
     api("io.spinnaker.embedded-redis:embedded-redis:0.9.0")
     api("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
-    api("com.nhaarman:mockito-kotlin:1.6.0")
     api("com.ninja-squad:springmockk:2.0.3")
     api("com.squareup.okhttp3:logging-interceptor:${versions.okhttp3}")
     api("com.squareup.okhttp3:mockwebserver:${versions.okhttp3}")
