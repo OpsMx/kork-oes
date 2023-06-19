@@ -28,7 +28,7 @@ ext {
     spectator        : "1.5.4", //spectator        : "1.0.6",//changed version for PR3 porting
     spek             : "1.1.5",
     spek2            : "2.0.9",
-    springBoot       : "3.0.6",
+    springBoot       : "3.0.7",
     springCloud      : "2022.0.2",
     springfoxSwagger : "3.0.0",//"2.9.2",
     //swagger          : "1.5.20", //this should stay in sync with what springfoxSwagger expects
@@ -103,7 +103,7 @@ dependencies {
   api("com.jcraft:jsch.agentproxy.jsch:0.0.9")
   api("com.jcraft:jsch.agentproxy.connector-factory:0.0.9")
   api("io.github.resilience4j:resilience4j-all:2.0.0")
-  api("commons-io:commons-io:2.11.0")
+  
   api("org.mockito:mockito-all:1.10.19")//parent to org.objenesis:objenesis:2.5.1-->3.2 compatabile with java17
 
   api("com.netflix.eureka:eureka-client:2.0.0")
@@ -119,7 +119,7 @@ dependencies {
   api("com.netflix.spectator:spectator-reg-atlas:${versions.spectator}")
   api("com.netflix.spectator:spectator-web-spring:${versions.spectator}")
   api("com.netflix.spectator:spectator-reg-micrometer:${versions.spectator}")
-  api("mysql:mysql-connector-java:8.0.20")
+  
 
   api ("io.springfox:springfox-boot-starter:3.0.0")
 
@@ -127,7 +127,7 @@ dependencies {
     api("org.yaml:snakeyaml:2.0")
     api("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.0")
     api("org.liquibase:liquibase-core:4.21.0")
-
+    api("mysql:mysql-connector-java:8.0.28")
     api("org.codehaus.jettison:jettison:1.5.4")
     api ("com.thoughtworks.xstream:xstream:1.4.20")
     api("commons-jxpath:commons-jxpath:1.3")
@@ -138,6 +138,7 @@ dependencies {
     api("com.fasterxml.woodstox:woodstox-core:6.4.0")
     api("net.minidev:json-smart:2.4.9")
     api("com.google.oauth-client:google-oauth-client:1.34.1")
+    api("commons-io:commons-io:2.11.0")
   }
 
 
