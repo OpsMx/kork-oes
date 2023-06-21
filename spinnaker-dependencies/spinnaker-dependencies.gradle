@@ -119,7 +119,7 @@ dependencies {
   api("com.netflix.spectator:spectator-reg-atlas:${versions.spectator}")
   api("com.netflix.spectator:spectator-web-spring:${versions.spectator}")
   api("com.netflix.spectator:spectator-reg-micrometer:${versions.spectator}")
-  api("mysql:mysql-connector-java:8.0.20")
+  api("mysql:mysql-connector-java:8.0.28")
 
   api ("io.springfox:springfox-boot-starter:3.0.0")
 
@@ -151,6 +151,9 @@ dependencies {
     api("cglib:cglib-nodep:3.3.0")
     api("com.jcraft:jsch.agentproxy.connector-factory:${versions.jschAgentProxy}")
     api("com.nhaarman:mockito-kotlin:1.6.0")
+    api("mysql:mysql-connector-java:8.0.28")
+    api("commons-io:commons-io:2.11.0")
+    api("org.springframework.boot:spring-boot-autoconfigure:3.0.7")
   }
 
   /*constraints {
@@ -213,7 +216,6 @@ dependencies {
     api("com.sun.xml.bind:jaxb-impl:2.3.2")
     api("com.vdurmont:semver4j:3.1.0")
     api("commons-configuration:commons-configuration:1.8")
-    api("commons-io:commons-io:2.11.0")
     // CVE's in 3.2.1
     api("commons-collections:commons-collections:[3.2.2,3.3)")
     api("de.danielbechler:java-object-diff:0.95")
@@ -225,7 +227,6 @@ dependencies {
     api("io.swagger:swagger-annotations:${versions.swagger}")
     api("javax.annotation:javax.annotation-api:1.3.2")
     api("javax.xml.bind:jaxb-api:2.3.1")
-    api("mysql:mysql-connector-java:8.0.20")
     api("net.logstash.logback:logstash-logback-encoder:4.11")
     api("net.minidev:json-smart:2.4.1") // TODO: remove this with upgrade of spring-boot version to 2.5.0 or above
     api("org.apache.commons:commons-exec:1.3")
@@ -279,7 +280,6 @@ dependencies {
   }*/
   /*constraints {
     api("org.springframework.security:spring-security-core")
-    api("org.springframework.boot:spring-boot-autoconfigure")
     api("org.springframework.boot:spring-boot-starter-security")
     runtime("org.springframework.boot:spring-boot-starter-web")
     api("org.springframework.boot:spring-boot-starter-actuator")
