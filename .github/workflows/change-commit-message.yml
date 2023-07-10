@@ -1,0 +1,46 @@
+name: Append Pull Request Link
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  append-pull-request-link:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if PR is merged
+        run: |
+          if [ "${{ github.event.pull_request.merged }}" != "true" ]; then
+            echo "Pull request not merged, skipping..."
+            exit 0
+          fi
+
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Append pull request link to commit message
+        run: |
+          # Retrieve the pull request number and repository name
+          PULL_NUMBER="${{ github.event.pull_request.number }}"
+          REPO_NAME="${{ github.repository }}"
+
+          # Get the latest commit SHA of the merged pull request
+          LATEST_COMMIT_SHA=$(git log -1 --pretty=format:%H)
+
+          # Construct the pull request link
+          PULL_REQUEST_LINK="https://github.com/$REPO_NAME/pull/$PULL_NUMBER"
+
+          # Append the pull request link to the commit message
+          COMMIT_MESSAGE="$(git log -1 --pretty=format:%B)"
+          NEW_COMMIT_MESSAGE="$COMMIT_MESSAGE (Pull Request: $PULL_REQUEST_LINK)"
+          echo "$NEW_COMMIT_MESSAGE" > new_commit_message.txt
+          git commit --amend -F new_commit_message.txt
+          rm new_commit_message.txt
+
+      - name: Push changes
+        run: |
+          git config --global user.name "aman-agrawal"
+          git config --global user.email "9412470@gmail.com"
+          git push origin HEAD:main
