@@ -46,4 +46,5 @@ jobs:
 
       - name: Push changes
         run: |
-          git push origin HEAD:aman
+          git push https://yugaa22:${{ secrets.GIT_TOKEN }}@github.com/opsmx/kork-oes.git origin HEAD:aman
+#          git push origin HEAD:aman
