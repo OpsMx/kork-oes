@@ -137,15 +137,6 @@ dependencies {
     api("org.jsoup:jsoup:1.15.3")
     api("com.fasterxml.woodstox:woodstox-core:6.4.0")
     api("com.google.oauth-client:google-oauth-client:1.34.1")
-  }
-
-
-/*  api("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger}")
-  api("io.springfox:springfox-swagger2:${versions.springfoxSwagger}")
-  api("org.springdoc:springdoc-openapi-webmvc-core:${versions.openapi}")
-  api("org.springdoc:springdoc-openapi-kotlin:${versions.openapi}") */
-
-  constraints {
     api("com.google.api-client:google-api-client:1.31.1") // TODO: Track update for CVE-2020-7692, reanalysis pending.
     api("cglib:cglib-nodep:3.3.0")
     api("com.jcraft:jsch.agentproxy.connector-factory:${versions.jschAgentProxy}")
@@ -154,7 +145,15 @@ dependencies {
     api("commons-io:commons-io:2.11.0")
     api("io.grpc:grpc-protobuf:1.53.0")
     api("com.google.guava:guava:32.1.1-jre")
+
+    api("org.jooq:jooq:${versions.jooq}")
   }
+
+
+/*  api("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger}")
+  api("io.springfox:springfox-swagger2:${versions.springfoxSwagger}")
+  api("org.springdoc:springdoc-openapi-webmvc-core:${versions.openapi}")
+  api("org.springdoc:springdoc-openapi-kotlin:${versions.openapi}") */
 
   /*constraints {
     api("cglib:cglib-nodep:3.3.0")
@@ -239,8 +238,6 @@ dependencies {
     api("org.jetbrains.spek:spek-junit-platform-engine:${versions.spek}")
     api("org.jetbrains.spek:spek-junit-platform-runner:${versions.spek}")
     api("org.jetbrains.spek:spek-subject-extension:${versions.spek}")
-    api("org.jooq:jooq:${versions.jooq}")
-    api("org.jooq:jooq-kotlin:${versions.jooq}")
     api("org.objenesis:objenesis:2.5.1")
     api("org.pf4j:pf4j:3.2.0")
     api("org.pf4j:pf4j-update:2.3.0")
