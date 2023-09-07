@@ -12,7 +12,8 @@ ext {
     bouncycastle     : "1.70",
     brave            : "5.14.1",//5.12.3",
     gcp              : "25.3.0",
-    jooq             : "3.13.6",
+    jooq             : "3.17.14",
+    jooqKotlin       : "3.17.14",
     jsch             : "0.1.54",
     jschAgentProxy   : "0.0.9",
     // spring boot 2.5.14 specifies logback 1.2.11, but a rosco test hung with
@@ -147,6 +148,7 @@ dependencies {
     api("com.google.guava:guava:32.1.1-jre")
 
     api("org.jooq:jooq:${versions.jooq}")
+    api("org.jooq:jooq-kotlin:${versions.jooqKotlin}")
   }
 
 
