@@ -16,19 +16,17 @@
 package com.netflix.spinnaker.kork.jedis.telemetry;
 
 import com.netflix.spectator.api.Registry;
-import org.apache.commons.pool2.PooledObjectFactory;
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.apache.commons.pool2.impl.GenericObjectPool;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 public class InstrumentedJedisPool extends JedisPool {
 
-  private Registry registry;
-  private JedisPool delegated;
-  private String poolName;
+  private final Registry registry;
+  private final JedisPool delegated;
+  private final String poolName;
 
-  // private GenericObjectPool<Jedis> delegateInternalPool = new GenericObjectPool<>(new
-  // JedisFactory());
+  private GenericObjectPool<Jedis> delegateInternalPool;
 
   public InstrumentedJedisPool(Registry registry, JedisPool delegated) {
     this(registry, delegated, "unnamed");
@@ -41,19 +39,31 @@ public class InstrumentedJedisPool extends JedisPool {
   }
 
   @SuppressWarnings("unchecked")
+  public GenericObjectPool<Jedis> getInternalPoolReference() {
+    if (delegateInternalPool == null) {
+      try {
+        delegateInternalPool = (GenericObjectPool<Jedis>) delegated;
+      } catch (Exception e) {
+        throw new IllegalStateException(
+            "Could not typecast JedisPool instance to GenericObjectPool", e);
+      }
+    }
+    return delegateInternalPool;
+  }
+
   @Override
   public Jedis getResource() {
-    return new InstrumentedJedis(registry, delegated.getResource(), poolName).unwrap();
+    return new InstrumentedJedis(registry, delegated.getResource(), poolName);
   }
 
-  // @Override
-  public void returnResourceObject(Jedis resource) {
-    // super.returnResourceObject(unwrapResource(resource));
+  @Override
+  public void returnResource(Jedis resource) {
+    super.returnResource(unwrapResource(resource));
   }
 
-  // @Override
-  protected void returnBrokenResourceObject(Jedis resource) {
-    // super.returnBrokenResourceObject(unwrapResource(resource));
+  @Override
+  public void returnBrokenResource(Jedis resource) {
+    super.returnBrokenResource(unwrapResource(resource));
   }
 
   @Override
@@ -61,57 +71,40 @@ public class InstrumentedJedisPool extends JedisPool {
     delegated.close();
   }
 
-  // public boolean isClosed() {
-  // return delegated.isClosed();
-  // }
-
-  public void initPool(GenericObjectPoolConfig poolConfig, PooledObjectFactory<Jedis> factory) {
-    // Explicitly not initializing the pool here, as the delegated pool will initialize itself
-  }
+  //  @Override
+  //  public boolean isClosed() {
+  //    return delegated.isClosed();
+  //  }
 
   @Override
   public void destroy() {
     delegated.destroy();
   }
 
-  protected void closeInternalPool() {
-    // Explicitly not calling this; destroy and initPool are the only references to this method
-  }
-
   @Override
   public int getNumActive() {
-    return delegated.getNumActive();
+    return getInternalPoolReference().getNumActive();
   }
 
   @Override
   public int getNumIdle() {
-    return delegated.getNumIdle();
+    return getInternalPoolReference().getNumIdle();
   }
 
   @Override
   public int getNumWaiters() {
-    return delegated.getNumWaiters();
+    return getInternalPoolReference().getNumWaiters();
   }
-
-  // @Override
-  // public long getMeanBorrowWaitTimeMillis() {
-  // return getInternalPoolReference().getMeanBorrowWaitTimeMillis();
-  // }
-  //
-  // @Override
-  // public long getMaxBorrowWaitTimeMillis() {
-  // return getInternalPoolReference().getMaxBorrowWaitTimeMillis();
-  // }
 
   @Override
   public void addObjects(int count) {
     delegated.addObjects(count);
   }
 
-  // private Jedis unwrapResource(Jedis jedis) {
-  // if (jedis instanceof InstrumentedJedis) {
-  // return ((InstrumentedJedis) jedis).unwrap();
-  // }
-  // return jedis;
-  // }
+  private Jedis unwrapResource(Jedis jedis) {
+    if (jedis instanceof InstrumentedJedis) {
+      return ((InstrumentedJedis) jedis).unwrap();
+    }
+    return jedis;
+  }
 }
