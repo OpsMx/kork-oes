@@ -14,10 +14,12 @@ import org.springframework.context.annotation.Import
 import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.web.SecurityFilterChain
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import spock.lang.Specification
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TestControllersConfiguration)
@@ -92,13 +94,15 @@ class GenericExceptionHandlersMvcSpec extends Specification {
   @EnableAutoConfiguration
   static class TestControllersConfiguration {
 
-    @Configuration
     @EnableWebSecurity
-    class WebSecurityConfig {
-      protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-          .headers().disable()
-          .authorizeRequests().anyRequest().permitAll()
+    class WebSecurityConfig implements WebMvcConfigurer {
+      @Bean
+      protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().headers().disable()
+        http.authorizeHttpRequests().anyRequest()
+          .permitAll()
+
+        return http.build()
       }
     }
 
