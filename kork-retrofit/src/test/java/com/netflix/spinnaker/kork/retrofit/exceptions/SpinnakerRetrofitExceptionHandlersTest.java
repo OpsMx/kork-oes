@@ -43,11 +43,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.util.UriComponentsBuilder;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -154,15 +156,14 @@ class SpinnakerRetrofitExceptionHandlersTest {
   @EnableAutoConfiguration
   static class TestControllerConfiguration {
     @EnableWebSecurity
-    class WebSecurityConfig {
-      protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().headers().disable().authorizeRequests().anyRequest().permitAll();
-      }
-    }
+    class WebSecurityConfig implements WebMvcConfigurer {
+      @Bean
+      protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().headers().disable();
+        http.authorizeHttpRequests().anyRequest().permitAll();
 
-    @Bean
-    TestController testController() {
-      return new TestController();
+        return http.build();
+      }
     }
   }
 
