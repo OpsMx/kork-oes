@@ -39,6 +39,7 @@ import strikt.assertions.isNotNull
     "sql.enabled=true",
     "sql.migration.jdbcUrl=jdbc:h2:mem:test",
     "sql.migration.dialect=H2",
+    "sql.migration.duplicateFileMode=WARN",
     "sql.connectionPool.jdbcUrl=jdbc:h2:mem:test",
     "sql.connectionPool.dialect=H2"
   ]
