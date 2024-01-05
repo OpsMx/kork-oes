@@ -127,10 +127,10 @@ abstract class BaseLockManagerSpec<T extends LockManager> extends Specification 
     ensureLockExists(lockOptions.lockName)
 
     when:
-    def response = lockManager.tryReleaseLock(lock, true)
+    def response = lockManager.releaseLock(lock, true)
 
     then:
-    response == LockReleaseStatus.SUCCESS.toString()
+    response == true
 
     ensureLockReleased(lockOptions.lockName)
   }
