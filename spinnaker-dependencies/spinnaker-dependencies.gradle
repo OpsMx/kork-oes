@@ -1,6 +1,5 @@
 apply plugin: "java-platform"
 
-
 javaPlatform {
   allowDependencies()
 }
@@ -8,9 +7,9 @@ javaPlatform {
 ext {
   versions = [
     arrow            : "0.13.2",
-    aws              : "1.12.411", //aws              : "1.12.176", //changed version for PR3 porting
+    aws              : "1.12.411",
     bouncycastle     : "1.70",
-    brave            : "5.14.1",//5.12.3",
+    brave            : "5.14.1",
     gcp              : "25.3.0",
     jooq             : "3.13.6",
     jsch             : "0.1.54",
@@ -25,13 +24,12 @@ ext {
     openapi          : "1.7.0", // this needs to be kept in sync with spring boot as it pulls in the spring-boot-dependencies BOM
     retrofit         : "1.9.0",
     retrofit2        : "2.8.1",
-    spectator        : "1.5.4", //spectator        : "1.0.6",//changed version for PR3 porting
+    spectator        : "1.5.4", //spectator
     spek             : "1.1.5",
     spek2            : "2.0.9",
     springBoot       : "3.0.9",
     springCloud      : "2022.0.2",
-    springfoxSwagger : "3.0.0",//"2.9.2",
-    //swagger          : "1.5.20", //this should stay in sync with what springfoxSwagger expects
+    springfoxSwagger : "3.0.0",
 
     // Spring boot 2.4.13 brings in 9.0.55.  Spring boot 2.5.14 brings in
     // 9.0.63.  Use 9.0.69 to resolve CVE-2022-42252 and CVE-2022-45143.  Spring
@@ -60,11 +58,7 @@ dependencies {
   api(platform("org.junit:junit-bom:5.9.1"))//5.6.3"))
   api(platform("com.fasterxml.jackson:jackson-bom:2.14.1"))//2.12.7.20221012"))
   api(platform("io.zipkin.brave:brave-bom:${versions.brave}"))
-  api(platform("org.springframework.boot:spring-boot-dependencies:${versions.springBoot}")) {
-    //exclude group: 'org.springframework.boot', module: 'spring-boot-autoconfigure'
-    //org.springframework.boot:spring-boot-autoconfigure:3.0.0
-    //exclude group: 'org.springframework.boot' module:'spring-boot-autoconfigure'
-  }
+  api(platform("org.springframework.boot:spring-boot-dependencies:${versions.springBoot}"))
   api(platform("com.amazonaws:aws-java-sdk-bom:${versions.aws}"))
   api(platform("com.google.protobuf:protobuf-bom:${versions.protobuf}"))
   api(platform("com.google.cloud:libraries-bom:${versions.gcp}")) {
@@ -77,8 +71,6 @@ dependencies {
   api(platform("com.oracle.oci.sdk:oci-java-sdk-bom:1.5.17"))
   api(platform("org.testcontainers:testcontainers-bom:1.16.2"))
   api(platform("io.arrow-kt:arrow-stack:${versions.arrow}"))
-
-//added for PR3 porting:start
   api("dev.minutest:minutest:1.13.0")
   api("io.mockk:mockk:1.10.5")
   api("org.spekframework.spek2:spek-dsl-jvm:${versions.spek2}")
@@ -94,12 +86,10 @@ dependencies {
   api("org.pf4j:pf4j:3.10.0")
   api("com.squareup.okhttp3:mockwebserver:${versions.okhttp3}")
   api("com.squareup.retrofit2:retrofit-mock:${versions.retrofit2}")
-  //added for PR3 porting:end
 
   api("org.junit.platform:junit-platform-runner:1.9.2")
   api("org.assertj:assertj-core:3.23.1")
   api("com.amazonaws:aws-java-sdk-sts:1.12.411")
-//  api("com.google.cloud:libraries-bom:26.13.0")
   api("com.jcraft:jsch.agentproxy.jsch:0.0.9")
   api("com.jcraft:jsch.agentproxy.connector-factory:0.0.9")
   api("io.github.resilience4j:resilience4j-all:2.0.0")
@@ -156,137 +146,4 @@ dependencies {
     api("com.jayway.jsonpath:json-path:2.9.0")
     api("org.springframework:spring-webmvc:6.0.14")
   }
-
-
-/*  api("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger}")
-  api("io.springfox:springfox-swagger2:${versions.springfoxSwagger}")
-  api("org.springdoc:springdoc-openapi-webmvc-core:${versions.openapi}")
-  api("org.springdoc:springdoc-openapi-kotlin:${versions.openapi}") */
-
-  /*constraints {
-    api("cglib:cglib-nodep:3.3.0")
-    api("ch.qos.logback:logback-access:${versions.logback}")
-    api("ch.qos.logback:logback-classic:${versions.logback}")
-    api("ch.qos.logback:logback-core:${versions.logback}")
-    api("com.amazonaws:aws-java-sdk:${versions.aws}")
-    api("com.google.api-client:google-api-client:1.30.10") // TODO: Track update for CVE-2020-7692, reanalysis pending.
-    api("com.google.apis:google-api-services-admin-directory:directory_v1-rev105-1.25.0")
-    api("com.google.apis:google-api-services-cloudbuild:v1-rev836-1.25.0")
-    api("com.google.apis:google-api-services-compute:alpha-rev20200526-1.30.9")
-    api("com.google.apis:google-api-services-iam:v1-rev267-1.25.0")
-    api("com.google.apis:google-api-services-monitoring:v3-rev477-1.25.0")
-    api("com.google.apis:google-api-services-storage:v1-rev141-1.25.0")
-    api("com.google.code.findbugs:jsr305:3.0.2")
-    api("com.google.guava:guava:30.0-jre")
-    // JinJava 2.5.3 has a bad bug: https://github.com/HubSpot/jinjava/issues/429
-    api("com.hubspot.jinjava:jinjava:2.5.2")
-    api("com.jakewharton.retrofit:retrofit1-okhttp3-client:1.1.0")
-    api("com.jcraft.jsch:${versions.jsch}")
-    api("com.jcraft:jsch.agentproxy.connector-factory:${versions.jschAgentProxy}")
-    api("com.jcraft:jsch.agentproxy.jsch:${versions.jschAgentProxy}")
-    api("com.natpryce:hamkrest:1.4.2.2")
-    api("com.netflix.archaius:archaius-core:0.7.7")
-    api("com.netflix.awsobjectmapper:awsobjectmapper:${versions.aws}")
-    api("com.netflix.dyno:dyno-jedis:1.7.2")
-    api("com.netflix.eureka:eureka-client:1.10.17")
-    api("com.netflix.frigga:frigga:0.24.0")
-    api("com.netflix.netflix-commons:netflix-eventbus:0.3.0")
-    api("com.netflix.spectator:spectator-api:${versions.spectator}")
-    api("com.netflix.spectator:spectator-ext-aws:${versions.spectator}")
-    api("com.netflix.spectator:spectator-ext-gc:${versions.spectator}")
-    api("com.netflix.spectator:spectator-ext-jvm:${versions.spectator}")
-    api("com.netflix.spectator:spectator-nflx-plugin:${versions.spectator}")
-    api("com.netflix.spectator:spectator-reg-atlas:${versions.spectator}")
-    api("com.netflix.spectator:spectator-web-spring:${versions.spectator}")
-    api("com.netflix.spectator:spectator-reg-micrometer:${versions.spectator}")
-    api("com.nimbusds:nimbus-jose-jwt:7.9")
-    api("io.spinnaker.embedded-redis:embedded-redis:0.9.0")
-    api("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
-    api("com.ninja-squad:springmockk:2.0.3")
-    api("com.squareup.okhttp3:logging-interceptor:${versions.okhttp3}")
-    api("com.squareup.okhttp3:mockwebserver:${versions.okhttp3}")
-    api("com.squareup.okhttp3:okhttp-sse:${versions.okhttp3}")
-    api("com.squareup.okhttp3:okhttp-urlconnection:${versions.okhttp3}")
-    api("com.squareup.okhttp3:okhttp:${versions.okhttp3}")
-    api("com.squareup.okhttp:mockwebserver:${versions.okhttp}")
-    api("com.squareup.okhttp:okhttp-apache:${versions.okhttp}")
-    api("com.squareup.okhttp:okhttp-urlconnection:${versions.okhttp}")
-    api("com.squareup.okhttp:okhttp:${versions.okhttp}")
-    api("com.squareup.retrofit2:converter-jackson:${versions.retrofit2}")
-    api("com.squareup.retrofit2:retrofit-mock:${versions.retrofit2}")
-    api("com.squareup.retrofit2:retrofit:${versions.retrofit2}")
-    api("com.squareup.retrofit:converter-jackson:${versions.retrofit}")
-    api("com.squareup.retrofit:converter-simplexml:${versions.retrofit}")
-    api("com.squareup.retrofit:retrofit-mock:${versions.retrofit}")
-    api("com.squareup.retrofit:retrofit:${versions.retrofit}")
-    api("com.sun.xml.bind:jaxb-core:2.3.0.1")
-    api("com.sun.xml.bind:jaxb-impl:2.3.2")
-    api("com.vdurmont:semver4j:3.1.0")
-    api("commons-configuration:commons-configuration:1.8")
-    // CVE's in 3.2.1
-    api("commons-collections:commons-collections:[3.2.2,3.3)")
-    api("de.danielbechler:java-object-diff:0.95")
-    api("de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.2.0")
-    api("dev.minutest:minutest:1.13.0")
-    api("io.mockk:mockk:1.10.5")
-    api("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger}")
-    api("io.springfox:springfox-swagger2:${versions.springfoxSwagger}")
-    api("io.swagger:swagger-annotations:${versions.swagger}")
-    api("javax.annotation:javax.annotation-api:1.3.2")
-    api("javax.xml.bind:jaxb-api:2.3.1")
-    api("net.logstash.logback:logstash-logback-encoder:4.11")
-    api("net.minidev:json-smart:2.4.1") // TODO: remove this with upgrade of spring-boot version to 2.5.0 or above
-    api("org.apache.commons:commons-exec:1.3")
-    api("org.bouncycastle:bcpkix-jdk15on:${versions.bouncycastle}")
-    api("org.bouncycastle:bcprov-jdk15on:${versions.bouncycastle}")
-    api("org.jetbrains:annotations:19.0.0")
-    api("org.spekframework.spek2:spek-dsl-jvm:${versions.spek2}")
-    api("org.spekframework.spek2:spek-runner-junit5:${versions.spek2}")
-    api("org.jetbrains.spek:spek-api:${versions.spek}")
-    api("org.jetbrains.spek:spek-junit-platform-engine:${versions.spek}")
-    api("org.jetbrains.spek:spek-junit-platform-runner:${versions.spek}")
-    api("org.jetbrains.spek:spek-subject-extension:${versions.spek}")
-    api("org.objenesis:objenesis:2.5.1")
-    api("org.pf4j:pf4j:3.2.0")
-    api("org.pf4j:pf4j-update:2.3.0")
-
-    // snakeyaml 1.29 fails to parse yaml (including some k8s manifests), so
-    // stick with 1.27 since that's what spring boot 2.4.13 uses.
-    // https://github.com/spring-projects/spring-boot/issues/30159#issuecomment-1125969155
-    // has details, including that snakeyaml 1.28 doesn't suffer from this bug.
-    // We could remove this specification altogether, and move to 1.28 along
-    // with spring boot 2.5, but I'd rather pin it here to avoid hitting the bug
-    // when we upgrade to spring boot 2.6.x.  It's safe to upgrade beyond 1.29
-    // with spring boot >= 2.6.12.  See
-    // https://github.com/spring-projects/spring-boot/issues/32228#issue-136185850.0.
-    api("org.yaml:snakeyaml:1.27")
-    api("org.springdoc:springdoc-openapi-webmvc-core:${versions.openapi}")
-    api("org.springdoc:springdoc-openapi-kotlin:${versions.openapi}")
-    api("org.springframework.boot:spring-boot-configuration-processor:${versions.springBoot}")
-    api("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.3.12.RELEASE")
-    api("org.springframework.security.extensions:spring-security-saml-dsl-core:1.0.5.RELEASE")
-    api("org.springframework.security.extensions:spring-security-saml2-core:1.0.9.RELEASE")
-    api("org.testng:testng:7.4.0") // TODO: remove this with upgrade of spring-boot version to 2.5.0 or with upgrade of groovy-all to 3.0.8
-    api("org.threeten:threeten-extra:1.0")
-    api("org.apache.tomcat.embed:tomcat-embed-core:${versions.tomcat}")
-    api("org.apache.tomcat.embed:tomcat-embed-el:${versions.tomcat}")
-    api("org.apache.tomcat.embed:tomcat-embed-websocket:${versions.tomcat}")
-    api('org.apache.ant:ant:1.10.12') {
-      because "1.9.15 is resolved transitively through Groovy, removes CVE-2021-36374, CVE-2021-36373, CVE-2020-11979, CVE-2020-15250"
-    }
-    api('org.apache.ant:ant-launcher:1.10.12'){
-      because "1.9.15 is resolved transitively through Groovy, removes CVE-2021-36374, CVE-2021-36373, CVE-2020-11979, CVE-2020-15250"
-    }
-
-    api('org.owasp.esapi:esapi:2.3.0.0') {
-      because '2.1.0.1 is resolved transitively through spring-security-saml-dsl-core, removes CVE-2022-23457'
-    }
-
-  }*/
-  /*constraints {
-    api("org.springframework.security:spring-security-core")
-    api("org.springframework.boot:spring-boot-starter-security")
-    runtime("org.springframework.boot:spring-boot-starter-web")
-    api("org.springframework.boot:spring-boot-starter-actuator")
-  }*/
 }

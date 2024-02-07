@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 package com.netflix.spinnaker.kork.plugins.finders
-class SpinnakerPropertiesPluginDescriptorFinderTest{}
-/*
+
 import com.netflix.spinnaker.kork.plugins.SpinnakerPluginDescriptor
 import com.netflix.spinnaker.kork.plugins.internal.PluginZip
 import com.netflix.spinnaker.kork.plugins.internal.TestPlugin
-
+import dev.minutest.junit.JUnit5Minutests
 import dev.minutest.rootContext
-import dev.minutest.test
 import okio.use
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
@@ -36,7 +34,7 @@ import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 import strikt.assertions.isTrue
 
-class SpinnakerPropertiesPluginDescriptorFinderTest{
+class SpinnakerPropertiesPluginDescriptorFinderTest : JUnit5Minutests {
 
   @TempDir
   lateinit var pluginsPath: Path
@@ -60,10 +58,10 @@ class SpinnakerPropertiesPluginDescriptorFinderTest{
 
     init {
       val pluginPath = Files.createDirectory(pluginsPath.resolve("pf4j.test-plugin-1"))
-      //storePropertiesToPath(getPlugin1Properties(), pluginPath)
+      storePropertiesToPath(getPlugin1Properties(), pluginPath)
     }
 
-  /*  private fun getPlugin1Properties(): Properties {
+    private fun getPlugin1Properties(): Properties {
       return PluginZip.createProperties(
         mapOf(
           PropertiesPluginDescriptorFinder.PLUGIN_ID to "pf4j.test-plugin-1",
@@ -77,7 +75,7 @@ class SpinnakerPropertiesPluginDescriptorFinderTest{
           SpinnakerPropertiesPluginDescriptorFinder.PLUGIN_UNSAFE to "true"
         )
       )
-    }*/
+    }
 
     private fun storePropertiesToPath(properties: Properties, pluginPath: Path) {
       val path = pluginPath.resolve(PropertiesPluginDescriptorFinder.DEFAULT_PROPERTIES_FILE_NAME)
@@ -86,6 +84,3 @@ class SpinnakerPropertiesPluginDescriptorFinderTest{
     }
   }
 }
-
-
- */
