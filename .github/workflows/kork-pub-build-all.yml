@@ -4,7 +4,7 @@ on:
   workflow_call:
   push:
     branches:
-    - nov13
+    - OES-1.30.1-nov-cve
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx6g -Xms6g
   CONTAINER_REGISTRY: quay.io/opsmxpublic
@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - uses: actions/setup-java@v2
@@ -24,7 +25,7 @@ jobs:
           distribution: 'temurin'
       - name: Build
         env:
-          NEXUS_VERSION: nov13-SNAPSHOT
+          NEXUS_VERSION: OES-1.30.1-nov-cve-SNAPSHOT
         run: |
           
               cat <<EOF>> patch
@@ -97,7 +98,7 @@ jobs:
         uses: actions/checkout@v2
         with:
          repository: opsmx/fiat-oes
-         ref: refs/heads/OES-1.30.1
+         ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - uses: actions/setup-java@v2
@@ -106,7 +107,7 @@ jobs:
           distribution: 'temurin'
       - name: Build
         env:
-          NEXUS_VERSION: nov13-SNAPSHOT
+          NEXUS_VERSION: OES-1.30.1-nov-cve-SNAPSHOT
         run: |
             
               cat <<EOF>> patch
@@ -164,7 +165,7 @@ jobs:
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
-                  yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+                  yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
               
@@ -178,7 +179,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
          repository: opsmx/clouddriver-oes
-         ref: refs/heads/OES-1.30.1
+         ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - uses: actions/setup-java@v2
@@ -187,7 +188,7 @@ jobs:
           distribution: 'temurin'
       - name: Build
         env:
-          NEXUS_VERSION: nov13-SNAPSHOT
+          NEXUS_VERSION: OES-1.30.1-nov-cve-SNAPSHOT
         run: |
             
               cat <<EOF>> patch
@@ -254,7 +255,7 @@ jobs:
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
-                  yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+                  yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
           
@@ -267,7 +268,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
          repository: opsmx/front50-oes
-         ref: refs/heads/OES-1.30.1
+         ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - uses: actions/setup-java@v2
@@ -276,7 +277,7 @@ jobs:
           distribution: 'temurin'
       - name: Build
         env:
-          NEXUS_VERSION: nov13-SNAPSHOT
+          NEXUS_VERSION: OES-1.30.1-nov-cve-SNAPSHOT
         run: |
             
               cat <<EOF>> patch
@@ -336,7 +337,7 @@ jobs:
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
-                  yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+                  yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
           
@@ -349,7 +350,7 @@ jobs:
       - uses: actions/checkout@v2        
         with:
           repository: opsmx/orca-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - uses: actions/setup-java@v2
@@ -358,7 +359,7 @@ jobs:
           distribution: 'temurin'
       - name: Build
         env:
-          NEXUS_VERSION: nov13-SNAPSHOT
+          NEXUS_VERSION: OES-1.30.1-nov-cve-SNAPSHOT
         run: |
             
               cat <<EOF>> patch
@@ -415,7 +416,7 @@ jobs:
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
-                  yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+                  yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
@@ -434,7 +435,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/clouddriver-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -471,12 +472,12 @@ jobs:
               
             sed "s/^\(DEFAULT_JVM_OPTS\)\s*=\s*'.*'\$/\1='$extra_opts_escaped'/"  -i clouddriver-web/build/install/clouddriver/bin/clouddriver
 
-            yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+            yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
 
-                  cat gradle.properties
+                  #cat gradle.properties
      
           ./gradlew --no-daemon -PenableCrossCompilerPlugin=true clouddriver-web:installDist -x test 
                         
@@ -528,7 +529,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/deck-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -591,7 +592,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/echo-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -623,7 +624,7 @@ jobs:
           
 
 
-            yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+            yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
@@ -677,7 +678,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/fiat-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -709,7 +710,7 @@ jobs:
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
 
-            yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+            yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
@@ -761,7 +762,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/front50-oes
-          ref: refs/heads/OES-1.30.1  
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -793,7 +794,7 @@ jobs:
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
 
-            yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+              yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
@@ -846,7 +847,7 @@ jobs:
       - uses: actions/checkout@v2        
         with:
           repository: opsmx/gate-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -880,7 +881,7 @@ jobs:
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
 
-            yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+              yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
@@ -935,7 +936,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/igor-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -967,7 +968,7 @@ jobs:
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
 
-            yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+            yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
@@ -1028,7 +1029,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/kayenta-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -1095,7 +1096,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/orca-oes
-          ref: refs/heads/OES-1.30.1    
+          ref: refs/heads/OES-1.30.1-nov-cve  
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -1128,7 +1129,7 @@ jobs:
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
 
-            yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+            yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
@@ -1184,7 +1185,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/rosco-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -1217,7 +1218,7 @@ jobs:
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
 
-            yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+            yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
@@ -1270,7 +1271,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/halyard-oes
-          ref: refs/heads/OES-1.30.x-master-adhoc
+          ref: refs/heads/OES-1.30.1-nov-cve
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -1302,7 +1303,7 @@ jobs:
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
            
-            yq  '.korkVersion = nov13-SNAPSHOT' gradle.properties > gradle.properties-bkp
+            yq  '.korkVersion = OES-1.30.1-nov-cve-SNAPSHOT' gradle.properties > gradle.properties-bkp
 
                   mv gradle.properties-bkp gradle.properties
 
