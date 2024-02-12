@@ -1094,7 +1094,7 @@ jobs:
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
 
 
-           #sed 's/^orcaVersion=.*/orcaVersion=OES-1.30.1-nov-cve-SNAPSHOT/' gradle.properties > gradle.properties-bkp
+           sed 's/^orcaVersion=.*/orcaVersion=OES-1.30.1-nov-cve-SNAPSHOT/' gradle.properties > gradle.properties-bkp
 
             mv gradle.properties-bkp  gradle.properties
             
@@ -1346,7 +1346,7 @@ jobs:
              # sed 's/^korkVersion=.*/korkVersion=OES-1.30.1-nov-cve-SNAPSHOT/' gradle.properties > gradle.properties-bkp
 
 
-             sed  's/^korkVersion=.*/korkVersion=OES-1.30.1-nov-cve-SNAPSHOT/; s/^fiatVersion=.*/fiatVersion=OES-1.30.1-nov-cve--SNAPSHOT/; s/^clouddriverVersion=.*/clouddriverVersion=OES-1.30.1-nov-cve--SNAPSHOT/; s/^front50Version=.*/front50Version=OES-1.30.1-nov-cve--SNAPSHOT/' gradle.properties > gradle.properties-bkp
+             sed  's/^korkVersion=.*/korkVersion=OES-1.30.1-nov-cve-SNAPSHOT/; s/^fiatVersion=.*/fiatVersion=OES-1.30.1-nov-cve-SNAPSHOT/; s/^clouddriverVersion=.*/clouddriverVersion=OES-1.30.1-nov-cve-SNAPSHOT/; s/^front50Version=.*/front50Version=OES-1.30.1-nov-cve-SNAPSHOT/' gradle.properties > gradle.properties-bkp
 
 
                   mv gradle.properties-bkp gradle.properties
