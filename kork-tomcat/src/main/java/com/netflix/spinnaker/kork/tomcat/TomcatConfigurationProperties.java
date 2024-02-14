@@ -106,5 +106,4 @@ public class TomcatConfigurationProperties {
   public Boolean getRejectIllegalHeader() {
     return rejectIllegalHeader;
   }
-
 }

@@ -19,4 +19,3 @@ databaseChangeLog:
       rollback:
         - dropTable:
             tableName: sample
-
