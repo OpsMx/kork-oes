@@ -29,7 +29,7 @@ ext {
     spek2            : "2.0.9",
     springBoot       : "3.0.9",
     springCloud      : "2022.0.2",
-    springfoxSwagger : "3.0.0",
+    springdocVersion : "2.0.3",
 
     // Spring boot 2.4.13 brings in 9.0.55.  Spring boot 2.5.14 brings in
     // 9.0.63.  Use 9.0.69 to resolve CVE-2022-42252 and CVE-2022-45143.  Spring
@@ -111,8 +111,6 @@ dependencies {
   api("com.netflix.spectator:spectator-reg-micrometer:${versions.spectator}")
   api("mysql:mysql-connector-java:8.0.28")
 
-  api ("io.springfox:springfox-boot-starter:3.0.0")
-
   constraints{
     api("org.yaml:snakeyaml:2.0")
     api("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.0")
@@ -145,5 +143,6 @@ dependencies {
     api("io.projectreactor.netty:reactor-netty-http:1.1.13")
     api("com.jayway.jsonpath:json-path:2.9.0")
     api("org.springframework:spring-webmvc:6.0.14")
+    api("org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.springdocVersion}")
   }
 }
