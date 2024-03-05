@@ -14,7 +14,7 @@ dependencies {
 
   testRuntimeOnly "mysql:mysql-connector-java"
   testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
-  testRuntimeOnly "org.postgresql:postgresql"
+  testRuntimeOnly "org.postgresql:postgresql:42.7.2"
 }
 
 
