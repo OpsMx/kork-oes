@@ -144,5 +144,6 @@ dependencies {
     api("org.springframework:spring-webmvc:6.0.14")
     api("org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.springdocVersion}")
     api("org.quartz-scheduler:quartz:2.5.0-rc1")
+    api("org.apache.tomcat.embed:tomcat-embed-core:10.1.16")
   }
 }
