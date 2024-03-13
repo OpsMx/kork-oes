@@ -145,5 +145,7 @@ dependencies {
     api("org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.springdocVersion}")
     api("org.quartz-scheduler:quartz:2.5.0-rc1")
     api("org.apache.tomcat.embed:tomcat-embed-core:10.1.16")
+    api("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    api("com.squareup.okio:okio-jvm:3.8.0")
   }
 }
