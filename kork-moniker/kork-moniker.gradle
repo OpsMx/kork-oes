@@ -20,7 +20,7 @@ dependencies {
 
   compileOnly "org.projectlombok:lombok"
   annotationProcessor "org.projectlombok:lombok"
-  implementation "com.netflix.frigga:frigga"
+  implementation "com.netflix.frigga:frigga:0.26.0"
 
   testImplementation "org.spockframework:spock-core"
   testImplementation "org.junit.jupiter:junit-jupiter-api"

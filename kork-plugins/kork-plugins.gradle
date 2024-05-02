@@ -13,22 +13,23 @@ dependencies {
   implementation project(":kork-telemetry")
 
   implementation "com.github.ben-manes.caffeine:caffeine"
-  implementation "com.netflix.spectator:spectator-api"
+  implementation "com.netflix.spectator:spectator-api:1.5.3"
 
   implementation project(":kork-plugins-spring-api")
 
   implementation project(":kork-web")
-  implementation("com.squareup.retrofit2:retrofit")
-  implementation("com.squareup.retrofit2:converter-jackson")
+  implementation("com.squareup.retrofit2:retrofit:2.9.0")
+  implementation("com.squareup.retrofit2:converter-jackson:2.9.0")
   implementation("com.squareup.okhttp3:logging-interceptor")
 
   implementation "org.pf4j:pf4j"
-  implementation "org.pf4j:pf4j-update"
+  implementation "org.pf4j:pf4j-update:2.3.0"
 
   implementation "org.springframework.boot:spring-boot-starter-web"
   implementation "org.springframework.boot:spring-boot-starter-actuator"
   implementation("com.google.guava:guava")
   implementation "javax.inject:javax.inject:1"
+  implementation "com.guicedee.services:javax.inject:1.1.1.1-SP1"
 
   implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
   implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-properties")
@@ -39,7 +40,7 @@ dependencies {
   testImplementation("org.mockito:mockito-core")
   testImplementation "org.spockframework:spock-core"
   testImplementation "org.springframework.boot:spring-boot-starter-test"
-  testImplementation("com.github.tomakehurst:wiremock:2.15.0")
+  testImplementation("com.github.tomakehurst:wiremock:3.0.0-beta-2")//2.15.0")
 
   testRuntimeOnly "cglib:cglib-nodep"
   testRuntimeOnly "org.objenesis:objenesis"

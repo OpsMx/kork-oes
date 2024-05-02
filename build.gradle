@@ -23,6 +23,7 @@ plugins {
 
 allprojects {
   apply plugin: "io.spinnaker.project"
+  repositories {mavenCentral()}
 }
 
 subprojects {

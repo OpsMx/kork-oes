@@ -10,12 +10,12 @@ dependencies {
 
   //Test framework dependencies
   api("io.strikt:strikt-jvm")
-  api("dev.minutest:minutest")
-  api("io.mockk:mockk")
+  api("dev.minutest:minutest:1.13.0")
+  api("io.mockk:mockk:1.13.4")
   api("org.springframework.boot:spring-boot-starter-test")
   api("org.springframework.security:spring-security-test")
   api("org.springframework.security:spring-security-config")
-  api("com.ninja-squad:springmockk")
+  api("com.ninja-squad:springmockk:4.0.0")
 
   testRuntimeOnly "cglib:cglib-nodep"
   testRuntimeOnly "org.objenesis:objenesis"

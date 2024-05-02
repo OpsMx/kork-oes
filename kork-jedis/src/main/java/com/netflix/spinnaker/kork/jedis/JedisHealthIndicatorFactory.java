@@ -16,7 +16,6 @@
 package com.netflix.spinnaker.kork.jedis;
 
 import java.lang.reflect.Field;
-import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -41,9 +40,6 @@ public class JedisHealthIndicatorFactory {
   public static HealthIndicator build(Pool<Jedis> jedisPool) {
     try {
       final Pool<Jedis> src = jedisPool;
-      final Field poolAccess = Pool.class.getDeclaredField("internalPool");
-      poolAccess.setAccessible(true);
-      GenericObjectPool<Jedis> internal = (GenericObjectPool<Jedis>) poolAccess.get(jedisPool);
       return () -> {
         Jedis jedis = null;
         Health.Builder health;
@@ -59,15 +55,15 @@ public class JedisHealthIndicatorFactory {
         } finally {
           if (jedis != null) jedis.close();
         }
-        health.withDetail("maxIdle", internal.getMaxIdle());
-        health.withDetail("minIdle", internal.getMinIdle());
-        health.withDetail("numActive", internal.getNumActive());
-        health.withDetail("numIdle", internal.getNumIdle());
-        health.withDetail("numWaiters", internal.getNumWaiters());
+        health.withDetail("maxIdle", jedisPool.getMaxIdle());
+        health.withDetail("minIdle", jedisPool.getMinIdle());
+        health.withDetail("numActive", jedisPool.getNumActive());
+        health.withDetail("numIdle", jedisPool.getNumIdle());
+        health.withDetail("numWaiters", jedisPool.getNumWaiters());
 
         return health.build();
       };
-    } catch (IllegalAccessException | NoSuchFieldException e) {
+    } catch (Exception e) {
       throw new BeanCreationException("Error creating Redis health indicator", e);
     }
   }

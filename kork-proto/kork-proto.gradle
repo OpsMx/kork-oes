@@ -15,9 +15,3 @@ protobuf {
     artifact = "com.google.protobuf:protoc:3.21.12"
   }
 }
-
-idea {
-  module {
-    generatedSourceDirs += file("${protobuf.generatedFilesBaseDir}/main/java")
-  }
-}

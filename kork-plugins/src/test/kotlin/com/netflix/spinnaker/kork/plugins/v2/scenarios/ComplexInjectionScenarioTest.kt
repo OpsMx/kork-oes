@@ -16,7 +16,6 @@
  */
 
 package com.netflix.spinnaker.kork.plugins.v2.scenarios
-
 import com.netflix.spinnaker.config.PluginsAutoConfiguration
 import com.netflix.spinnaker.kork.plugins.FRAMEWORK_V2
 import com.netflix.spinnaker.kork.plugins.testplugin.api.TestExtension
@@ -49,7 +48,6 @@ class ComplexInjectionScenarioTest : JUnit5Minutests {
     fixture {
       Fixture()
     }
-
     test("bi-directional (service <-> plugin) injection works") {
       app.run { ctx ->
         val injectsPluginExtensions = ctx.getBean(InjectsPluginExtensions::class.java)
