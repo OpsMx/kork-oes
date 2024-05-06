@@ -61,6 +61,7 @@ dependencies {
   api(platform("com.oracle.oci.sdk:oci-java-sdk-bom:1.5.17"))
   api(platform("org.testcontainers:testcontainers-bom:1.16.2"))
   api(platform("io.arrow-kt:arrow-stack:${versions.arrow}"))
+  api(platform("org.junit:junit-bom:5.10.2"))
   api("org.mockito:mockito-core:5.10.0")
   api("mysql:mysql-connector-java:8.0.28")
 
@@ -147,13 +148,15 @@ dependencies {
       }
     }
     api("org.jooq:jooq-kotlin:${versions.jooq}")
+    api("org.junit.platform:junit-platform-engine:1.10.2")
     api("org.liquibase:liquibase-core"){
        version {
          strictly "4.24.0"
        }
     }
+    api("org.mockito:mockito-core:5.10.0")
     api("org.objenesis:objenesis:2.5.1")
-    api("org.pf4j:pf4j:3.2.0")
+    api("org.pf4j:pf4j:3.10.0")
     api("org.pf4j:pf4j-update:2.3.0")
 
     // snakeyaml 1.29 fails to parse yaml (including some k8s manifests), so

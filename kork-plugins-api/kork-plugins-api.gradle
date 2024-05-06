@@ -23,7 +23,7 @@ dependencies {
   api "org.slf4j:slf4j-api"
   api "javax.annotation:javax.annotation-api:1.3.2"
   api project(":kork-annotations")
-  api "org.pf4j:pf4j:3.10.0"
+  api "org.pf4j:pf4j"
 
   testImplementation(project(":kork-plugins"))
 }
