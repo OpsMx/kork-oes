@@ -7,7 +7,7 @@ javaPlatform {
 ext {
   versions = [
     arrow            : "0.13.2",
-    aws              : "1.12.411",
+    aws              : "1.12.701",
     bouncycastle     : "1.70",
     brave            : "5.14.1",
     gcp              : "25.3.0",
@@ -89,7 +89,6 @@ dependencies {
 
   api("org.junit.platform:junit-platform-runner:1.9.2")
   api("org.assertj:assertj-core:3.23.1")
-  api("com.amazonaws:aws-java-sdk-sts:1.12.411")
   api("com.jcraft:jsch.agentproxy.jsch:0.0.9")
   api("com.jcraft:jsch.agentproxy.connector-factory:0.0.9")
   api("io.github.resilience4j:resilience4j-all:2.0.0")
