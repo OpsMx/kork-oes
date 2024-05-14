@@ -76,7 +76,6 @@ class SelectableServiceSpec extends Specification {
     [cloudProvider: "kubernetes"]                                                                                        || oortService      // selects by cloud provider
   }
 
-
   def "should default to all execution types if none configured (by origin selector)"() {
     expect:
     new ByOriginServiceSelector(instanceService, 20, [:]).executionTypes.sort() == ["orchestration", "pipeline"]

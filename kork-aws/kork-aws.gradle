@@ -20,16 +20,16 @@ dependencies {
   api(platform(project(":spinnaker-dependencies")))
 
   api "org.springframework.boot:spring-boot-autoconfigure"
-  api "com.netflix.spectator:spectator-api:1.5.3"
-  api "com.amazonaws:aws-java-sdk-core:1.12.411"
-  api "com.amazonaws:aws-java-sdk-sns:1.12.411"
-  api "com.amazonaws:aws-java-sdk-sqs:1.12.411"
+  api "com.netflix.spectator:spectator-api"
+  api "com.amazonaws:aws-java-sdk-core"
+  api "com.amazonaws:aws-java-sdk-sns"
+  api "com.amazonaws:aws-java-sdk-sqs"
   api "org.apache.groovy:groovy"
-  api "com.hubspot.jinjava:jinjava:2.6.0"
-  api "com.jcraft:jsch.agentproxy.jsch:0.0.9"
+  api "com.hubspot.jinjava:jinjava"
+  api "com.jcraft:jsch.agentproxy.jsch"
   api "com.jcraft:jsch.agentproxy.connector-factory"
 
-  implementation("com.netflix.spectator:spectator-ext-aws:1.5.3") {
+  implementation("com.netflix.spectator:spectator-ext-aws") {
     // exclude transitives to keep spectator's version of the aws sdk from
     // overriding what we specify elsewhere.  It's not so much the aws sdk that
     // causes problems, but its transitive dependencies -- jackson and then
@@ -37,9 +37,9 @@ dependencies {
     transitive = false
   }
 
-  runtimeOnly "com.amazonaws:aws-java-sdk-sts:1.12.411"
+  runtimeOnly "com.amazonaws:aws-java-sdk-sts"
 
-  testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.2"
+  testImplementation "org.junit.jupiter:junit-jupiter-api"
   testImplementation "org.junit.jupiter:junit-jupiter-engine"
   testImplementation "org.junit.jupiter:junit-jupiter-params"
 }

@@ -43,6 +43,7 @@ import retrofit2.http.GET
 import strikt.api.expect
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
+
 class Retrofit2ServiceProviderTest : JUnit5Minutests {
 
   fun tests() = rootContext {
@@ -81,6 +82,7 @@ class Retrofit2ServiceProviderTest : JUnit5Minutests {
   }
 
 }
+
 @Configuration
 private open class TestConfiguration {
 
@@ -102,6 +104,7 @@ private open class TestConfiguration {
   open fun spinnakerRequestInterceptor(): SpinnakerRequestInterceptor {
     return SpinnakerRequestInterceptor(OkHttpClientConfigurationProperties())
   }
+
   @Bean
   open fun objectMapper(): ObjectMapper {
     return  ObjectMapper()

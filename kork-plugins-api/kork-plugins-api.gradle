@@ -21,7 +21,7 @@ dependencies {
   api(platform(project(":spinnaker-dependencies")))
 
   api "org.slf4j:slf4j-api"
-  api "javax.annotation:javax.annotation-api:1.3.2"
+  api "javax.annotation:javax.annotation-api"
   api project(":kork-annotations")
   api "org.pf4j:pf4j"
 

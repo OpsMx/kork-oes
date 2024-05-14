@@ -69,6 +69,7 @@ public class ServiceVersion {
         resolvedServiceVersion = UNKNOWN_VERSION;
       }
     }
+
     return resolvedServiceVersion;
   }
 }

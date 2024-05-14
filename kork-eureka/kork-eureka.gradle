@@ -27,7 +27,7 @@ dependencies {
   implementation "org.springframework.boot:spring-boot-autoconfigure"
   implementation "org.springframework.boot:spring-boot-starter-actuator"
 
-  implementation "com.netflix.archaius:archaius-core:0.7.6"
+  implementation "com.netflix.archaius:archaius-core"
   implementation "commons-configuration:commons-configuration"
   implementation 'com.netflix.eureka:eureka-core-jersey3:2.0.0'
   implementation "com.netflix.netflix-commons:netflix-eventbus"

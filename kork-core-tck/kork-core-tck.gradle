@@ -8,5 +8,5 @@ dependencies {
   implementation(project(":kork-exceptions"))
 
   implementation("org.apache.groovy:groovy")
-  implementation("org.spockframework:spock-core:2.3-groovy-4.0")
+  implementation("org.spockframework:spock-core")
 }
