@@ -97,7 +97,7 @@ jobs:
         uses: actions/checkout@v2
         with:
          repository: opsmx/fiat-oes
-         ref: refs/heads/OES-1.30.1
+         ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - uses: actions/setup-java@v2
@@ -106,7 +106,7 @@ jobs:
           distribution: 'temurin'
       - name: Build
         env:
-          NEXUS_VERSION: 1-0-SNAPSHOT
+          NEXUS_VERSION: 1.33.0-SNAPSHOT
         run: |
             
               cat <<EOF>> patch
@@ -174,7 +174,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
          repository: opsmx/clouddriver-oes
-         ref: refs/heads/OES-1.30.1
+         ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - uses: actions/setup-java@v2
@@ -183,7 +183,7 @@ jobs:
           distribution: 'temurin'
       - name: Build
         env:
-          NEXUS_VERSION: 1-0-SNAPSHOT
+          NEXUS_VERSION: 1.33.0-SNAPSHOT
         run: |
             
               cat <<EOF>> patch
@@ -259,7 +259,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
          repository: opsmx/front50-oes
-         ref: refs/heads/OES-1.30.1
+         ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - uses: actions/setup-java@v2
@@ -268,7 +268,7 @@ jobs:
           distribution: 'temurin'
       - name: Build
         env:
-          NEXUS_VERSION: 1-0-SNAPSHOT
+          NEXUS_VERSION: 1.33.0-SNAPSHOT
         run: |
             
               cat <<EOF>> patch
@@ -337,7 +337,7 @@ jobs:
       - uses: actions/checkout@v2        
         with:
           repository: opsmx/orca-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - uses: actions/setup-java@v2
@@ -346,7 +346,7 @@ jobs:
           distribution: 'temurin'
       - name: Build
         env:
-          NEXUS_VERSION: 1-0-SNAPSHOT
+          NEXUS_VERSION: 1.33.0-SNAPSHOT
         run: |
             
               cat <<EOF>> patch
@@ -415,7 +415,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/clouddriver-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -428,8 +428,8 @@ jobs:
         id: build_variables
         run: |
           echo ::set-output name=REPO::ubi8-clouddriver-cve
-          ##echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          ##echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
          
@@ -517,8 +517,8 @@ jobs:
         id: build_variables
         run: |
           echo ::set-output name=REPO::ubi8-deck-cve
-          #echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
           
@@ -584,8 +584,8 @@ jobs:
         id: build_variables
         run: |
           echo ::set-output name=REPO::ubi8-echo-cve
-          #echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -653,7 +653,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/fiat-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -666,8 +666,8 @@ jobs:
         id: build_variables
         run: |
           echo ::set-output name=REPO::ubi8-fiat-cve
-          #echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -732,7 +732,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/front50-oes
-          ref: refs/heads/OES-1.30.1  
+          ref: refs/heads/OES-1.33.x  
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -745,8 +745,8 @@ jobs:
         id: build_variables
         run: |
           echo ::set-output name=REPO::ubi8-front50-cve
-          #echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -812,7 +812,7 @@ jobs:
       - uses: actions/checkout@v2        
         with:
           repository: opsmx/gate-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -828,8 +828,8 @@ jobs:
           
            echo git tag is ${GITHUB_REF#refs/*/}
           echo ::set-output name=REPO::ubi8-gate-cve
-          #echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -909,8 +909,8 @@ jobs:
         id: build_variables
         run: |
           echo ::set-output name=REPO::ubi8-igor-cve
-          #echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -997,8 +997,8 @@ jobs:
         id: build_variables
         run: |
           echo ::set-output name=REPO::ubi8-kayenta-cve
-          #echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -1065,8 +1065,8 @@ jobs:
         id: build_variables
         run: |
           echo ::set-output name=REPO::ubi8-orca-cve
-          #echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -1149,8 +1149,8 @@ jobs:
         id: build_variables
         run: |
           echo ::set-output name=REPO::ubi8-rosco-cve
-          #echo ::set-output name=VERSION::"1.30.1$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.30.1"
+          #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
+          echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
