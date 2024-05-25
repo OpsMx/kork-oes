@@ -1,7 +1,8 @@
 package com.netflix.spinnaker.kork.tomcat;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.net.URI;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,6 +33,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @TestPropertySource(
     properties = {
       "logging.level.org.apache.coyote.http11.Http11InputBuffer = DEBUG",
+      "server.tomcat.reject-illegal-header = false"
     })
 class WebEnvironmentTest {
 
@@ -45,14 +47,16 @@ class WebEnvironmentTest {
     // this is enough to cause a BAD_REQUEST if tomcat has rejectIllegalHeaders
     // set to true
     headers.add("X-Dum@my", "foo");
+
     URI uri =
         UriComponentsBuilder.fromHttpUrl("http://localhost/test-controller")
             .port(port)
             .build()
             .toUri();
+
     ResponseEntity<String> entity =
         restTemplate.exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), String.class);
-    Assertions.assertEquals(HttpStatus.BAD_REQUEST, entity.getStatusCode());
+    assertEquals(HttpStatus.OK, entity.getStatusCode());
   }
 
   @SpringBootApplication

@@ -36,8 +36,6 @@ public class TomcatConfigurationProperties {
 
   private List<String> cipherSuites = CipherSuites.getRecommendedCiphers();
 
-  private final Boolean rejectIllegalHeader = true;
-
   public int getLegacyServerPort() {
     return legacyServerPort;
   }
@@ -84,9 +82,5 @@ public class TomcatConfigurationProperties {
 
   public void setCipherSuites(List<String> cipherSuites) {
     this.cipherSuites = cipherSuites;
-  }
-
-  public Boolean getRejectIllegalHeader() {
-    return rejectIllegalHeader;
   }
 }
