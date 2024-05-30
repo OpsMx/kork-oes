@@ -22,6 +22,11 @@ import org.pf4j.util.StringUtils
 import org.slf4j.LoggerFactory
 
 /**
+ *  Opsmx custom docker version size
+ */
+private const val VERSION_SIZE = 4
+
+/**
  * Since plugins may require multiple services, this class is necessary to ensure we are making the
  * constraint check against the correct service.
  */
@@ -43,8 +48,13 @@ class SpinnakerServiceVersionManager(
         .parseAll(requires)
         .find { it.service.equals(serviceName, ignoreCase = true) }
 
-    if (requirements != null) {
-      return StringUtils.isNullOrEmpty(requirements.constraint) || Version.valueOf(version).satisfies(requirements.constraint)
+    if (requirements != null && version != null) {
+      var origVersion = version
+      val values = version.split(".")
+      if (values.size == VERSION_SIZE) {
+        origVersion = version.substringBeforeLast(".")
+      }
+      return StringUtils.isNullOrEmpty(requirements.constraint) || Version.valueOf(origVersion).satisfies(requirements.constraint)
     }
 
     return false

@@ -51,12 +51,12 @@ public class AwsProducer {
   }
 
   @NotNull
-  public List<@NotNull String> getAvailabilityZones() {
+  public List<String> getAvailabilityZones() {
     return dataContainer.list(format("aws/availabilityZones/%s", getRegion()));
   }
 
   @NotNull
-  public List<@NotNull String> getAvailabilityZones(String region) {
+  public List<String> getAvailabilityZones(String region) {
     return dataContainer.list(format("aws/availabilityZones/%s", region));
   }
 

@@ -16,7 +16,7 @@ dependencies {
   api project(":kork-crypto")
   api project(":kork-security")
   api project(":kork-exceptions")
-  api "org.codehaus.groovy:groovy"
+  api "org.apache.groovy:groovy"
   api "org.springframework.boot:spring-boot-starter-web"
   api "org.springframework.boot:spring-boot-starter-webflux"
   api "org.springframework.boot:spring-boot-starter-security"
@@ -30,6 +30,7 @@ dependencies {
 
   implementation "com.google.guava:guava"
   implementation "javax.inject:javax.inject:1"
+  implementation "com.guicedee.services:javax.inject:1.1.1.1-SP1"
   implementation("com.netflix.spectator:spectator-web-spring") {
     // exclude transitives since this brings in a newer version of spring (boot)
     // dependencies than we're compatible with (2.2.x for spring boot and 5.2.x

@@ -7,10 +7,10 @@ javaPlatform {
 ext {
   versions = [
     arrow            : "0.13.2",
-    aws              : "1.12.176",
+    aws              : "1.12.411",
     awsv2            : "2.19.0",
     bouncycastle     : "1.70",
-    brave            : "5.12.3",
+    brave            : "5.14.1",
     gcp              : "25.3.0",
     jooq             : "3.13.6",
     jsch             : "0.1.54",
@@ -18,21 +18,15 @@ ext {
     protobuf         : "3.21.12",
     okhttp           : "2.7.5", // CVE-2016-2402
     okhttp3          : "4.9.3",
-    openapi          : "1.3.9", // this needs to be kept in sync with spring boot as it pulls in the spring-boot-dependencies BOM
     retrofit         : "1.9.0",
-    retrofit2        : "2.8.1",
-    spectator        : "1.0.6",
+    retrofit2        : "2.9.0",
+    spectator        : "1.5.4",
     spek             : "1.1.5",
     spek2            : "2.0.9",
-    springBoot       : "2.5.15",
-    springCloud      : "2020.0.6",
-    springfoxSwagger : "2.9.2",
-    swagger          : "1.5.20", //this should stay in sync with what springfoxSwagger expects
-
-    // Spring boot 2.4.13 brings in 9.0.55.  Spring boot 2.5.14 brings in
-    // 9.0.63.  Use 9.0.69 to resolve CVE-2022-42252 and CVE-2022-45143.  Spring
-    // boot 2.6.14 and 2.7.6 bring in 9.0.69.
-    tomcat           : "9.0.69"
+    springBoot       : "3.0.9",
+    springCloud      : "2022.0.2",
+    springdocVersion : "2.0.3",
+    tomcat           : "10.1.16"
   ]
 }
 
@@ -50,7 +44,7 @@ dependencies {
    // 2.16.0 is subject to CVE-2021-45105.  2.17.0 is subject to CVE-2021-44832, so use >= 2.17.1.
   api(platform("org.apache.logging.log4j:log4j-bom:2.20.0"))
 
-  api(platform("org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.5.2"))
+  api(platform("org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.6.4"))
   //kotlinVersion comes from gradle.properties since we have kotlin code in
   // this project and need to configure gradle plugins etc.
   api(platform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
@@ -63,10 +57,13 @@ dependencies {
   api(platform("com.google.cloud:google-cloud-secretmanager:2.1.7"))
   api(platform("org.springframework.cloud:spring-cloud-dependencies:${versions.springCloud}"))
   api(platform("io.strikt:strikt-bom:0.31.0"))
-  api(platform("org.spockframework:spock-bom:2.0-groovy-3.0"))
+  api(platform("org.spockframework:spock-bom:2.4-M2-groovy-4.0"))
   api(platform("com.oracle.oci.sdk:oci-java-sdk-bom:1.5.17"))
-  api(platform("org.testcontainers:testcontainers-bom:1.16.2"))
+  api(platform("org.testcontainers:testcontainers-bom:1.17.6"))
   api(platform("io.arrow-kt:arrow-stack:${versions.arrow}"))
+  api(platform("org.junit:junit-bom:5.10.2"))
+  api("org.mockito:mockito-core:5.10.0")
+  api("mysql:mysql-connector-java:8.0.28")
 
   constraints {
     api("cglib:cglib-nodep:3.3.0")
@@ -77,7 +74,7 @@ dependencies {
     api("com.google.apis:google-api-services-compute:alpha-rev20200526-1.30.9")
     api("com.google.apis:google-api-services-iam:v1-rev267-1.25.0")
     api("com.google.apis:google-api-services-monitoring:v3-rev477-1.25.0")
-    api("com.google.apis:google-api-services-storage:v1-rev141-1.25.0")
+    api("com.google.apis:google-api-services-storage:v1-rev171-1.25.0")
     api("com.google.code.findbugs:jsr305:3.0.2")
     api("com.google.guava:guava:30.0-jre")
     // JinJava 2.5.3 has a bad bug: https://github.com/HubSpot/jinjava/issues/429
@@ -88,10 +85,10 @@ dependencies {
     api("com.jcraft:jsch.agentproxy.jsch:${versions.jschAgentProxy}")
     api("com.natpryce:hamkrest:1.4.2.2")
     api("com.netflix.archaius:archaius-core:0.7.7")
-    api("com.netflix.awsobjectmapper:awsobjectmapper:${versions.aws}")
+    api("com.netflix.awsobjectmapper:awsobjectmapper:1.12.261")
     api("com.netflix.dyno:dyno-jedis:1.7.2")
     api("com.netflix.eureka:eureka-client:1.10.17")
-    api("com.netflix.frigga:frigga:0.24.0")
+    api("com.netflix.frigga:frigga:0.26.0")
     api("com.netflix.netflix-commons:netflix-eventbus:0.3.0")
     api("com.netflix.spectator:spectator-api:${versions.spectator}")
     api("com.netflix.spectator:spectator-ext-aws:${versions.spectator}")
@@ -102,9 +99,8 @@ dependencies {
     api("com.netflix.spectator:spectator-web-spring:${versions.spectator}")
     api("com.netflix.spectator:spectator-reg-micrometer:${versions.spectator}")
     api("com.nimbusds:nimbus-jose-jwt:7.9")
-    api("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     api("com.nhaarman:mockito-kotlin:1.6.0")
-    api("com.ninja-squad:springmockk:2.0.3")
+    api("com.ninja-squad:springmockk:4.0.0")
     api("com.squareup.okhttp3:logging-interceptor:${versions.okhttp3}")
     api("com.squareup.okhttp3:mockwebserver:${versions.okhttp3}")
     api("com.squareup.okhttp3:okhttp-sse:${versions.okhttp3}")
@@ -131,12 +127,10 @@ dependencies {
     api("de.danielbechler:java-object-diff:0.95")
     api("de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.2.0")
     api("dev.minutest:minutest:1.13.0")
-    api("io.mockk:mockk:1.10.5")
-    api("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger}")
-    api("io.springfox:springfox-swagger2:${versions.springfoxSwagger}")
-    api("io.swagger:swagger-annotations:${versions.swagger}")
+    api("io.mockk:mockk:1.13.4")
     api("javax.annotation:javax.annotation-api:1.3.2")
     api("javax.xml.bind:jaxb-api:2.3.1")
+    api("mysql:mysql-connector-java:8.0.28")
     api("net.logstash.logback:logstash-logback-encoder:4.11")
     api("org.apache.commons:commons-exec:1.3")
     // TODO(jvz): beginning in BC 1.71, this should use the -jdk18on artifacts
@@ -149,15 +143,21 @@ dependencies {
     api("org.jetbrains.spek:spek-junit-platform-engine:${versions.spek}")
     api("org.jetbrains.spek:spek-junit-platform-runner:${versions.spek}")
     api("org.jetbrains.spek:spek-subject-extension:${versions.spek}")
-    api("org.jooq:jooq:${versions.jooq}")
+    api("org.jooq:jooq") {
+      version {
+        strictly "${versions.jooq}"
+      }
+    }
     api("org.jooq:jooq-kotlin:${versions.jooq}")
+    api("org.junit.platform:junit-platform-engine:1.10.2")
     api("org.liquibase:liquibase-core"){
        version {
          strictly "4.24.0"
        }
     }
+    api("org.mockito:mockito-core:5.10.0")
     api("org.objenesis:objenesis:2.5.1")
-    api("org.pf4j:pf4j:3.2.0")
+    api("org.pf4j:pf4j:3.10.0")
     api("org.pf4j:pf4j-update:2.3.0")
 
     // snakeyaml 1.29 fails to parse yaml (including some k8s manifests), so
@@ -172,15 +172,11 @@ dependencies {
     // making it strict as some of the modules have it resolved to higher versions (ex: kork-secrets-gcp to 1.30)
     api("org.yaml:snakeyaml") {
       version {
-        strictly "1.27"
+        strictly "2.0"
       }
     }
-    api("org.springdoc:springdoc-openapi-webmvc-core:${versions.openapi}")
-    api("org.springdoc:springdoc-openapi-kotlin:${versions.openapi}")
-    api("org.springframework.boot:spring-boot-configuration-processor:${versions.springBoot}")
-    api("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.3.12.RELEASE")
-    api("org.springframework.security.extensions:spring-security-saml-dsl-core:1.0.5.RELEASE")
-    api("org.springframework.security.extensions:spring-security-saml2-core:1.0.9.RELEASE")
+    api("org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.springdocVersion}")
+    api("org.springframework:spring-webmvc:6.0.14")
     api("org.threeten:threeten-extra:1.0")
     api("org.apache.tomcat.embed:tomcat-embed-core:${versions.tomcat}")
     api("org.apache.tomcat.embed:tomcat-embed-el:${versions.tomcat}")

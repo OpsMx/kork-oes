@@ -83,7 +83,7 @@ public class DataContainer {
 
   @NotNull
   @SuppressWarnings("unchecked")
-  public <T> List<@NotNull T> list(@NotNull String key) {
+  public <T> List<T> list(@NotNull String key) {
     List value = getOfType(key, List.class);
     return (List<T>) value;
   }

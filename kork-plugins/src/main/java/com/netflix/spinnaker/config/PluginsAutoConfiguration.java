@@ -265,6 +265,7 @@ public class PluginsAutoConfiguration {
       SpinnakerPluginManager pluginManager,
       ApplicationEventPublisher applicationEventPublisher,
       List<UpdateRepository> updateRepositories) {
+    log.info(" creating the spinnaker update manager bean");
     return new SpinnakerUpdateManager(applicationEventPublisher, pluginManager, updateRepositories);
   }
 
