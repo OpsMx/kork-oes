@@ -1,4 +1,4 @@
-name:  new  name kork publish and Build All including Halyard  
+name:  new  name kork publish and Build All including Halyard
 on:
   workflow_dispatch:
   workflow_call:
@@ -8,7 +8,7 @@ on:
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx6g -Xms6g
   CONTAINER_REGISTRY: quay.io/opsmxpublic
-  
+
 jobs:
   publish-kork:
     runs-on: ubuntu-latest
@@ -26,9 +26,9 @@ jobs:
         env:
           NEXUS_VERSION: 1.33.0-SNAPSHOT
         run: |
-          
+
               cat <<EOF>> patch
-              
+
               version = "$NEXUS_VERSION"
               group = 'io.spinnaker.kork'
               apply plugin: 'maven-publish'
@@ -57,38 +57,38 @@ jobs:
                          }
                      }
                 }
-               }  
+               }
                                tasks.withType(GenerateModuleMetadata).configureEach {
                       suppressedValidationErrors.add('enforced-platform')
                 }
 
               EOF
-             
+
               ls -d */  | grep -v  "gradle" | sed 's/\///g' > ds.txt
-              
+
               cat ds.txt
 
-              for i in $(cat ds.txt) 
+              for i in $(cat ds.txt)
               do
                sed  s/NEXUSARTIID/$i/g patch > patchnew
                cat patchnew >> $i/$i.gradle
-               
+
                #cat $i/$i.gradle
-         
+
               done
-             
+
               sed -e '/components\.java/ s/^#*/\/\//' -i kork-bom/kork-bom.gradle
               sed -e '/components\.java/ s/^#*/\/\//' -i spinnaker-dependencies/spinnaker-dependencies.gradle
-          
+
                  echo "checking -----------------------"
-                 
+
                sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-                                 
+
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
-                  
-                  
+
+
               ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
-                           
+
   publish-fiat:
     runs-on: ubuntu-latest
     needs: [publish-kork]
@@ -108,9 +108,9 @@ jobs:
         env:
           NEXUS_VERSION: 1.33.0-SNAPSHOT
         run: |
-            
+
               cat <<EOF>> patch
-              
+
               version = "$NEXUS_VERSION"
               group = 'io.spinnaker.fiat'
               apply plugin: 'maven-publish'
@@ -139,34 +139,34 @@ jobs:
                          }
                      }
                 }
-               }  
+               }
                                tasks.withType(GenerateModuleMetadata).configureEach {
                                          suppressedValidationErrors.add('enforced-platform')
                                        }
 
               EOF
-             
-              ls -d */  | grep "fiat" | sed 's/\///g' > ds.txt
-              
-              cat ds.txt
-              
 
-              for i in $(cat ds.txt) 
+              ls -d */  | grep "fiat" | sed 's/\///g' > ds.txt
+
+              cat ds.txt
+
+
+              for i in $(cat ds.txt)
               do
                sed  s/NEXUSARTIID/$i/g patch > patchnew
                cat patchnew >> $i/$i.gradle
-             
+
               done
                sed -e '/components\.java/ s/^#*/\/\//' -i fiat-bom/fiat-bom.gradle
-               
+
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle      
+                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-              
+
               ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
-              
-              
+
+
   publish-clouddriver:
     runs-on: ubuntu-latest
     needs: [publish-fiat]
@@ -185,9 +185,9 @@ jobs:
         env:
           NEXUS_VERSION: 1.33.0-SNAPSHOT
         run: |
-            
+
               cat <<EOF>> patch
-              
+
               version = "$NEXUS_VERSION"
               group = 'io.spinnaker.clouddriver'
               apply plugin: 'maven-publish'
@@ -216,42 +216,42 @@ jobs:
                          }
                      }
                 }
-               }  
+               }
                                tasks.withType(GenerateModuleMetadata).configureEach {
                                          suppressedValidationErrors.add('enforced-platform')
                                        }
 
               EOF
-             
+
               ls -d */  | grep "clouddriver" | sed 's/\///g' > ds.txt
-              
+
               #cat ds.txt
-              
-              for i in $(cat ds.txt) 
+
+              for i in $(cat ds.txt)
               do
                sed  s/NEXUSARTIID/$i/g patch > patchnew
                cat patchnew >> $i/$i.gradle
-             
+
               done
-             
+
               ls -l cats/ | grep '^d' | awk '{print $9}' > ds.txt
 
-              for i in $(cat ds.txt) 
+              for i in $(cat ds.txt)
               do
                sed  s/NEXUSARTIID/$i/g patch > patchnew
                cat patchnew >> cats/$i/$i.gradle
-             
+
               done
               sed -e '/components\.java/ s/^#*/\/\//' -i clouddriver-bom/clouddriver-bom.gradle
-              
-              
+
+
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle      
+                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-          
+
               ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
-                
+
   publish-front50:
     runs-on: ubuntu-latest
     needs: [publish-fiat]
@@ -270,9 +270,9 @@ jobs:
         env:
           NEXUS_VERSION: 1.33.0-SNAPSHOT
         run: |
-            
+
               cat <<EOF>> patch
-              
+
               version = "$NEXUS_VERSION"
               group = 'io.spinnaker.front50'
               apply plugin: 'maven-publish'
@@ -301,40 +301,40 @@ jobs:
                          }
                      }
                 }
-               }  
+               }
                                tasks.withType(GenerateModuleMetadata).configureEach {
                                          suppressedValidationErrors.add('enforced-platform')
                                        }
 
               EOF
-             
-              ls -d */  | grep "front50" | sed 's/\///g' > ds.txt
-              
-              cat ds.txt
-              
 
-              for i in $(cat ds.txt) 
+              ls -d */  | grep "front50" | sed 's/\///g' > ds.txt
+
+              cat ds.txt
+
+
+              for i in $(cat ds.txt)
               do
                sed  s/NEXUSARTIID/$i/g patch > patchnew
                cat patchnew >> $i/$i.gradle
-             
+
               done
-             
+
               sed -e '/components\.java/ s/^#*/\/\//' -i front50-bom/front50-bom.gradle
-              
-              
+
+
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle      
+                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-          
-                ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test               
- 
+
+                ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
+
   publish-orca:
     runs-on: ubuntu-latest
     needs: [publish-fiat]
     steps:
-      - uses: actions/checkout@v2        
+      - uses: actions/checkout@v2
         with:
           repository: opsmx/orca-oes
           ref: refs/heads/OES-1.33.x
@@ -348,9 +348,9 @@ jobs:
         env:
           NEXUS_VERSION: 1.33.0-SNAPSHOT
         run: |
-            
+
               cat <<EOF>> patch
-              
+
               version = "$NEXUS_VERSION"
               group = 'io.spinnaker.orca'
               apply plugin: 'maven-publish'
@@ -379,30 +379,30 @@ jobs:
                          }
                      }
                 }
-               }  
+               }
                                tasks.withType(GenerateModuleMetadata).configureEach {
                                          suppressedValidationErrors.add('enforced-platform')
                                        }
 
               EOF
-             
+
               ls -d */  | grep "orca\|keiko" | sed 's/\///g' > ds.txt
-              
-              for i in $(cat ds.txt) 
+
+              for i in $(cat ds.txt)
               do
                sed  s/NEXUSARTIID/$i/g patch > patchnew
                cat patchnew >> $i/$i.gradle
-             
+
               done
-             
+
               sed -e '/components\.java/ s/^#*/\/\//' -i orca-bom/orca-bom.gradle
-              
-              
+
+
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle      
+                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-          
+
                 ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
 
   clouddriver-build-push:
@@ -432,7 +432,7 @@ jobs:
           echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
-         
+
       - name: Login to Quay
         uses: docker/login-action@v1
         # use service account flow defined at: https://github.com/docker/login-action#service-account-based-authentication-1
@@ -444,20 +444,20 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
-        
+
           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-     
-          ./gradlew --no-daemon -PenableCrossCompilerPlugin=true clouddriver-web:installDist -x test 
-                        
+
+          ./gradlew --no-daemon -PenableCrossCompilerPlugin=true clouddriver-web:installDist -x test
+
             extra_opts='"-Djava.security.egd=file:/dev/./urandom" "-Dspring.config.import=optional:/opt/spinnaker/config/" "--add-opens=java.base/sun.net=ALL-UNNAMED" "--add-exports=java.base/sun.net=ALL-UNNAMED" "--add-opens=java.base/java.time=ALL-UNNAMED" "--add-exports=java.base/sun.security.rsa=ALL-UNNAMED" "--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" "--add-exports=java.base/sun.security.x509=ALL-UNNAMED"'
-            
+
             extra_opts_escaped=$(sed 's/[\/&]/\\&/g' <<< "$extra_opts")
-              
+
             sed "s/^\(DEFAULT_JVM_OPTS\)\s*=\s*'.*'\$/\1='$extra_opts_escaped'/"  -i clouddriver-web/build/install/clouddriver/bin/clouddriver
-                              
+
       - name: dockerBuildpush
         id: docker_build
         uses: docker/build-push-action@v2
@@ -471,7 +471,7 @@ jobs:
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}"
-      - name: dockerBuildpushjaeger      
+      - name: dockerBuildpushjaeger
         id: docker_build-dev
         uses: docker/build-push-action@v2
         with:
@@ -483,14 +483,14 @@ jobs:
             CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
           file: docker/ubi8/Dockerfile-dev
           push: true
-          tags:  "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"          
+          tags:  "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "clouddriver=$imageName" >> $GITHUB_OUTPUT
-             
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev
              echo $devimageName
              echo "clouddriver-dev=$devimageName" >> $GITHUB_OUTPUT
@@ -499,12 +499,12 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       deck: ${{ steps.get-img-name.outputs.deck }}
-      deck-dev: ${{ steps.get-img-name.outputs.deck-dev }}    
+      deck-dev: ${{ steps.get-img-name.outputs.deck-dev }}
     steps:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/deck-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -521,7 +521,7 @@ jobs:
           echo ::set-output name=VERSION::"1.33.x"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
-          
+
       - name: Login to Quay
         uses: docker/login-action@v1
         # use service account flow defined at: https://github.com/docker/login-action#service-account-based-authentication-1
@@ -535,12 +535,12 @@ jobs:
         run:  |
                cp docker/ubi8/setupapache2.sh docker/setup-apache2.sh
                cp docker/ubi8/runapache2.sh docker/run-apache2.sh
-    
+
                # To remove Special characters
                 sed -i 's/\r//' docker/setup-apache2.sh
                 sed -i 's/\r//' docker/run-apache2.sh
-              
-               ./gradlew build --no-daemon -PskipTests 
+
+               ./gradlew build --no-daemon -PskipTests
       - name: dockerBuildpush
         id: docker_build
         uses: docker/build-push-action@v2
@@ -551,27 +551,27 @@ jobs:
           tags: |
             "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "deck=$imageName" >> $GITHUB_OUTPUT
-             
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev
              echo $devimageName
              echo "deck-dev=$devimageName" >> $GITHUB_OUTPUT
-             
+
   echo-build-push:
     runs-on: ubuntu-latest
     outputs:
       echo: ${{ steps.get-img-name.outputs.echo }}
-      echo-dev: ${{ steps.get-img-name.outputs.echo-dev }}    
+      echo-dev: ${{ steps.get-img-name.outputs.echo-dev }}
     needs: [publish-fiat]
     steps:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/echo-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -603,8 +603,8 @@ jobs:
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-          
-          ./gradlew --no-daemon -PenableCrossCompilerPlugin=true echo-web:installDist -x test 
+
+          ./gradlew --no-daemon -PenableCrossCompilerPlugin=true echo-web:installDist -x test
 
       - name: dockerBuildpush
         uses: docker/build-push-action@v2
@@ -631,23 +631,23 @@ jobs:
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"                
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "echo=$imageName" >> $GITHUB_OUTPUT
-             
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev
              echo $devimageName
              echo "echo-dev=$devimageName" >> $GITHUB_OUTPUT
-             
+
   fiat-build-push:
     runs-on: ubuntu-latest
     outputs:
       fiat: ${{ steps.get-img-name.outputs.fiat }}
-      fiat-dev: ${{ steps.get-img-name.outputs.fiat-dev }}    
+      fiat-dev: ${{ steps.get-img-name.outputs.fiat-dev }}
     needs: [publish-fiat]
     steps:
       - uses: actions/checkout@v2
@@ -681,13 +681,13 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
-        
+
           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-          
-          ./gradlew --no-daemon -PenableCrossCompilerPlugin=true fiat-web:installDist -x test 
+
+          ./gradlew --no-daemon -PenableCrossCompilerPlugin=true fiat-web:installDist -x test
       - name: dockerBuildpush
         uses: docker/build-push-action@v2
         with:
@@ -711,14 +711,14 @@ jobs:
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"   
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "fiat=$imageName" >> $GITHUB_OUTPUT
-             
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev
              echo $devimageName
              echo "fiat-dev=$devimageName" >> $GITHUB_OUTPUT
@@ -726,13 +726,13 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       front50: ${{ steps.get-img-name.outputs.front50 }}
-      front50-dev: ${{ steps.get-img-name.outputs.front50-dev }}    
+      front50-dev: ${{ steps.get-img-name.outputs.front50-dev }}
     needs: [publish-fiat]
     steps:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/front50-oes
-          ref: refs/heads/OES-1.33.x  
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -760,13 +760,13 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
-        
+
              sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
              sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-        
-              ./gradlew --no-build-cache --no-daemon -PenableCrossCompilerPlugin=true front50-web:installDist -x test 
+
+              ./gradlew --no-build-cache --no-daemon -PenableCrossCompilerPlugin=true front50-web:installDist -x test
       - name: dockerBuildpush
         uses: docker/build-push-action@v2
         with:
@@ -782,7 +782,7 @@ jobs:
       - name: dockerBuildpushjaeger
         uses: docker/build-push-action@v2
         with:
-          context: .          
+          context: .
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
@@ -790,14 +790,14 @@ jobs:
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"  
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "front50=$imageName" >> $GITHUB_OUTPUT
-             
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev
              echo $devimageName
              echo "front50-dev=$devimageName" >> $GITHUB_OUTPUT
@@ -806,10 +806,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       gate: ${{ steps.get-img-name.outputs.gate }}
-      gate-dev: ${{ steps.get-img-name.outputs.gate-dev }}    
+      gate-dev: ${{ steps.get-img-name.outputs.gate-dev }}
     needs: [publish-fiat]
     steps:
-      - uses: actions/checkout@v2        
+      - uses: actions/checkout@v2
         with:
           repository: opsmx/gate-oes
           ref: refs/heads/OES-1.33.x
@@ -825,7 +825,7 @@ jobs:
         id: build_variables
         run: |
           echo Build number is ${{ github.run_number }}
-          
+
            echo git tag is ${GITHUB_REF#refs/*/}
           echo ::set-output name=REPO::ubi8-gate-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
@@ -847,8 +847,8 @@ jobs:
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
              sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-        
-              ./gradlew --no-daemon -PenableCrossCompilerPlugin=true gate-web:installDist -x test 
+
+              ./gradlew --no-daemon -PenableCrossCompilerPlugin=true gate-web:installDist -x test
       - name: dockerBuildpush
         uses: docker/build-push-action@v2
         with:
@@ -876,27 +876,27 @@ jobs:
           tags: |
             "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "gate=$imageName" >> $GITHUB_OUTPUT
-             
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev
              echo $devimageName
-             echo "gate-dev=$devimageName" >> $GITHUB_OUTPUT   
-   
+             echo "gate-dev=$devimageName" >> $GITHUB_OUTPUT
+
   igor-build-push:
     runs-on: ubuntu-latest
     outputs:
       igor: ${{ steps.get-img-name.outputs.igor }}
-      igor-dev: ${{ steps.get-img-name.outputs.igor-dev }}    
+      igor-dev: ${{ steps.get-img-name.outputs.igor-dev }}
     needs: [publish-fiat]
     steps:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/igor-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -924,21 +924,21 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
-        
+
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-        
-            ./gradlew --no-daemon -PenableCrossCompilerPlugin=true igor-web:installDist -x test 
-            
+
+            ./gradlew --no-daemon -PenableCrossCompilerPlugin=true igor-web:installDist -x test
+
             extra_opts='"-Djava.security.egd=file:/dev/./urandom" "-Dspring.config.import=optional:/opt/spinnaker/config/" "--add-opens=java.base/sun.net=ALL-UNNAMED" "--add-exports=java.base/sun.net=ALL-UNNAMED" "--add-opens=java.base/java.time=ALL-UNNAMED"'
 
             extra_opts_escaped=$(sed 's/[\/&]/\\&/g' <<< "$extra_opts")
-                      
-            sed "s/^\(DEFAULT_JVM_OPTS\)\s*=\s*'.*'\$/\1='$extra_opts_escaped'/" -i  igor-web/build/install/igor/bin/igor 
 
-            #cat igor-web/build/install/igor/bin/igor              
+            sed "s/^\(DEFAULT_JVM_OPTS\)\s*=\s*'.*'\$/\1='$extra_opts_escaped'/" -i  igor-web/build/install/igor/bin/igor
+
+            #cat igor-web/build/install/igor/bin/igor
       - name: dockerBuildpush
         uses: docker/build-push-action@v2
         with:
@@ -962,29 +962,29 @@ jobs:
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"                    
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "igor=$imageName" >> $GITHUB_OUTPUT
-             
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev
              echo $devimageName
              echo "igor-dev=$devimageName" >> $GITHUB_OUTPUT
-             
+
   kayenta-build-push:
     runs-on: ubuntu-latest
     outputs:
       kayenta: ${{ steps.get-img-name.outputs.kayenta }}
-      kayenta-dev: ${{ steps.get-img-name.outputs.kayenta-dev }}  
+      kayenta-dev: ${{ steps.get-img-name.outputs.kayenta-dev }}
     needs: [publish-orca]
     steps:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/kayenta-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -1016,13 +1016,13 @@ jobs:
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-           
-           ./gradlew --no-daemon -PenableCrossCompilerPlugin=true kayenta-web:installDist -x test 
+
+           ./gradlew --no-daemon -PenableCrossCompilerPlugin=true kayenta-web:installDist -x test
 
       - name: dockerBuildpush
         uses: docker/build-push-action@v2
         with:
-          context: .          
+          context: .
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
@@ -1030,18 +1030,18 @@ jobs:
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}"       
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "kayenta=$imageName" >> $GITHUB_OUTPUT
-             
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $devimageName
-             echo "kayenta-dev=$devimageName" >> $GITHUB_OUTPUT 
-             
+             echo "kayenta-dev=$devimageName" >> $GITHUB_OUTPUT
+
   orca-build-push:
     runs-on: ubuntu-latest
     outputs:
@@ -1052,7 +1052,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/orca-oes
-          ref: refs/heads/OES-1.30.1    
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -1080,19 +1080,19 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
-        
-        
+
+
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-        
-            ./gradlew --no-build-cache --no-daemon -PenableCrossCompilerPlugin=true orca-web:installDist -x test 
+
+            ./gradlew --no-build-cache --no-daemon -PenableCrossCompilerPlugin=true orca-web:installDist -x test
 
       - name: dockerBuildpush
         uses: docker/build-push-action@v2
         with:
-          context: .          
+          context: .
           build-args: |
             CUSTOMPLUGIN_RELEASEVERSION=v4.0.4.2-rc5
             CUSTOMPLUGIN_RELEASEORG=opsmx
@@ -1114,18 +1114,18 @@ jobs:
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"    
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "orca=$imageName" >> $GITHUB_OUTPUT
-            
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev
              echo $devimageName
-             echo "orca-dev=$devimageName" >> $GITHUB_OUTPUT          
-   
+             echo "orca-dev=$devimageName" >> $GITHUB_OUTPUT
+
   rosco-build-push:
     runs-on: ubuntu-latest
     outputs:
@@ -1136,7 +1136,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/rosco-oes
-          ref: refs/heads/OES-1.30.1
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -1164,19 +1164,19 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
-        
-        
+
+
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-        
-        
-             ./gradlew --no-daemon -PenableCrossCompilerPlugin=true rosco-web:installDist -x test 
+
+
+             ./gradlew --no-daemon -PenableCrossCompilerPlugin=true rosco-web:installDist -x test
       - name: dockerBuildpush
         uses: docker/build-push-action@v2
         with:
-          context: .          
+          context: .
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
@@ -1188,7 +1188,7 @@ jobs:
       - name: dockerBuildpushdev
         uses: docker/build-push-action@v2
         with:
-          context: .         
+          context: .
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
@@ -1196,14 +1196,14 @@ jobs:
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"   
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "rosco=$imageName" >> $GITHUB_OUTPUT
-             
+
            devimageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev
              echo $devimageName
              echo "rosco-dev=$devimageName" >> $GITHUB_OUTPUT
@@ -1217,7 +1217,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: opsmx/halyard-oes
-          ref: refs/heads/OES-1.30.x-master-adhoc
+          ref: refs/heads/OES-1.33.x
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -1245,13 +1245,13 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
-        
+
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-           
-            ./gradlew --no-daemon -PenableCrossCompilerPlugin=true halyard-web:installDist -x test 
+
+            ./gradlew --no-daemon -PenableCrossCompilerPlugin=true halyard-web:installDist -x test
       - name: dockerBuildpush
         uses: docker/build-push-action@v2
         with:
@@ -1259,14 +1259,14 @@ jobs:
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}"   
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}"
       - name: Get the image name
-        id: get-img-name  
+        id: get-img-name
         run: |
            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}
              echo $imageName
              echo "halyard=$imageName" >> $GITHUB_OUTPUT
-                     
+
   outputs:
     runs-on: ubuntu-latest
     needs: [clouddriver-build-push,deck-build-push,echo-build-push,fiat-build-push,front50-build-push,gate-build-push,igor-build-push,kayenta-build-push,orca-build-push,rosco-build-push,halyard-build-push]
@@ -1275,34 +1275,34 @@ jobs:
     - name: Check out Repository
       uses: actions/checkout@v3
     - name: Get Images List
-      run: | 
-         echo "--------------------Fips Docker Imgaes----------------" 
+      run: |
+         echo "--------------------Fips Docker Imgaes----------------"
 
-        
+
            echo ${{ needs.clouddriver-build-push.outputs.clouddriver }}
-           echo ${{ needs.deck-build-push.outputs.deck }} 
-           echo ${{ needs.echo-build-push.outputs.echo }} 
-           echo ${{ needs.fiat-build-push.outputs.fiat }} 
-           echo ${{ needs.front50-build-push.outputs.front50 }} 
-           echo ${{ needs.gate-build-push.outputs.gate }} 
-           echo ${{ needs.igor-build-push.outputs.igor }} 
-           echo ${{ needs.kayenta-build-push.outputs.kayenta }} 
-           echo ${{ needs.orca-build-push.outputs.orca }} 
-           echo ${{ needs.rosco-build-push.outputs.rosco }} 
-           echo ${{ needs.halyard-build-push.outputs.halyard }} 
+           echo ${{ needs.deck-build-push.outputs.deck }}
+           echo ${{ needs.echo-build-push.outputs.echo }}
+           echo ${{ needs.fiat-build-push.outputs.fiat }}
+           echo ${{ needs.front50-build-push.outputs.front50 }}
+           echo ${{ needs.gate-build-push.outputs.gate }}
+           echo ${{ needs.igor-build-push.outputs.igor }}
+           echo ${{ needs.kayenta-build-push.outputs.kayenta }}
+           echo ${{ needs.orca-build-push.outputs.orca }}
+           echo ${{ needs.rosco-build-push.outputs.rosco }}
+           echo ${{ needs.halyard-build-push.outputs.halyard }}
 
-           
-           echo "--------------------Dev Docker Imgaes----------------" 
-           
+
+           echo "--------------------Dev Docker Imgaes----------------"
+
            echo ${{ needs.clouddriver-build-push.outputs.clouddriver-dev }}
-           echo ${{ needs.deck-build-push.outputs.deck }} 
-           echo ${{ needs.echo-build-push.outputs.echo-dev }} 
-           echo ${{ needs.fiat-build-push.outputs.fiat-dev }} 
-           echo ${{ needs.front50-build-push.outputs.front50-dev }} 
-           echo ${{ needs.gate-build-push.outputs.gate-dev }} 
-           echo ${{ needs.igor-build-push.outputs.igor-dev }} 
-           echo ${{ needs.kayenta-build-push.outputs.kayenta }} 
-           echo ${{ needs.orca-build-push.outputs.orca-dev}} 
-           echo ${{ needs.rosco-build-push.outputs.rosco-dev }} 
-           echo ${{ needs.halyard-build-push.outputs.halyard }} 
-         
+           echo ${{ needs.deck-build-push.outputs.deck }}
+           echo ${{ needs.echo-build-push.outputs.echo-dev }}
+           echo ${{ needs.fiat-build-push.outputs.fiat-dev }}
+           echo ${{ needs.front50-build-push.outputs.front50-dev }}
+           echo ${{ needs.gate-build-push.outputs.gate-dev }}
+           echo ${{ needs.igor-build-push.outputs.igor-dev }}
+           echo ${{ needs.kayenta-build-push.outputs.kayenta }}
+           echo ${{ needs.orca-build-push.outputs.orca-dev}}
+           echo ${{ needs.rosco-build-push.outputs.rosco-dev }}
+           echo ${{ needs.halyard-build-push.outputs.halyard }}
+
