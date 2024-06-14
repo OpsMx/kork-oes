@@ -67,12 +67,12 @@ jobs:
              
               ls -d */  | grep -v  "gradle" | sed 's/\///g' > ds.txt
               
-              cat ds.txt
+              #cat ds.txt
 
               for i in $(cat ds.txt) 
               do
                sed  s/NEXUSARTIID/$i/g patch > patchnew
-               cat patchnew >> $i/$i.gradle
+               #cat patchnew >> $i/$i.gradle
                
                #cat $i/$i.gradle
          
@@ -81,19 +81,13 @@ jobs:
               sed -e '/components\.java/ s/^#*/\/\//' -i kork-bom/kork-bom.gradle
               sed -e '/components\.java/ s/^#*/\/\//' -i spinnaker-dependencies/spinnaker-dependencies.gradle
           
-                 echo "checking -----------------------"
-
-                  sed  -e 's/NEXUS_URL/${{ secrets.NEXUS_URL }}/'  -i settings.gradle
-
-                  sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
+                  sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i settings.gradle
+                  sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i settings.gradle
+                  sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i build.gradle
+                  sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i build.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
                   
-         
-                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
-                  
-                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/'  settings.gradle  > test
-                   
-                   cat test
-                  
-                  cat settings.gradle
+                 # cat settings.gradle
                  
               ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
