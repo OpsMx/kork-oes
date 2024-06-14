@@ -85,6 +85,8 @@ jobs:
                sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
 
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
 
               ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
@@ -163,6 +165,8 @@ jobs:
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
               ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
 
@@ -249,6 +253,8 @@ jobs:
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
               ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
 
@@ -327,6 +333,8 @@ jobs:
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
                 ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
 
@@ -402,6 +410,8 @@ jobs:
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
                 ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
 
@@ -449,6 +459,8 @@ jobs:
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
           ./gradlew --no-daemon -PenableCrossCompilerPlugin=true clouddriver-web:installDist -x test
 
@@ -686,6 +698,8 @@ jobs:
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
           ./gradlew --no-daemon -PenableCrossCompilerPlugin=true fiat-web:installDist -x test
       - name: dockerBuildpush
@@ -765,6 +779,8 @@ jobs:
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
              sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+             sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+             sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
               ./gradlew --no-build-cache --no-daemon -PenableCrossCompilerPlugin=true front50-web:installDist -x test
       - name: dockerBuildpush
@@ -847,6 +863,8 @@ jobs:
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
              sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
              sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+             sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+             sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
               ./gradlew --no-daemon -PenableCrossCompilerPlugin=true gate-web:installDist -x test
       - name: dockerBuildpush
@@ -929,6 +947,8 @@ jobs:
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+           sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+           sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
             ./gradlew --no-daemon -PenableCrossCompilerPlugin=true igor-web:installDist -x test
 
@@ -1016,6 +1036,8 @@ jobs:
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
            sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
            sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+           sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+           sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
            ./gradlew --no-daemon -PenableCrossCompilerPlugin=true kayenta-web:installDist -x test
 
