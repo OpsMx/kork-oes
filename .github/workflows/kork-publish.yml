@@ -51,7 +51,7 @@ jobs:
               repositories {
                  maven{
                  name = 'nexus'
-                 url "https://nexus.opsmx.net/repository/maven-snapshots/"
+                 url "${{ secrets.NEXUS_URL }}"
                   credentials {
                     username = "${{ secrets.NEXUS_USERNAME }}"
                     password = "${{ secrets.NEXUS_PASSWORD }}"
@@ -82,10 +82,12 @@ jobs:
               sed -e '/components\.java/ s/^#*/\/\//' -i spinnaker-dependencies/spinnaker-dependencies.gradle
           
                  echo "checking -----------------------"
-                 
+
+                  sed  -e 's/NEXUS_URL/${{ secrets.NEXUS_URL }}/'  -i settings.gradle
+
                   sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
                   
-                  
+         
                   sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
                   
                    sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/'  settings.gradle  > test
