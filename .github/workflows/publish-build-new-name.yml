@@ -80,14 +80,12 @@ jobs:
               sed -e '/components\.java/ s/^#*/\/\//' -i kork-bom/kork-bom.gradle
               sed -e '/components\.java/ s/^#*/\/\//' -i spinnaker-dependencies/spinnaker-dependencies.gradle
 
-                 echo "checking -----------------------"
-
-               sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-
-                  sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
-                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
-                  sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
-
+              sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i settings.gradle
+              sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i settings.gradle
+              sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i build.gradle
+              sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i build.gradle
+              sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+              sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
               ./gradlew --no-daemon -PenableCrossCompilerPlugin=true  publish -x test
 
@@ -611,10 +609,12 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
-          sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-          sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
-          sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
-          sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+          sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i settings.gradle
+          sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i settings.gradle
+          sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i build.gradle
+          sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i build.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
           ./gradlew --no-daemon -PenableCrossCompilerPlugin=true echo-web:installDist -x test
 
@@ -1103,11 +1103,12 @@ jobs:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
 
-
-           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
-           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
-           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+          sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i settings.gradle
+          sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i settings.gradle
+          sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i build.gradle
+          sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i build.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
             ./gradlew --no-build-cache --no-daemon -PenableCrossCompilerPlugin=true orca-web:installDist -x test
 
@@ -1187,12 +1188,12 @@ jobs:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
 
-
-           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
-           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
-           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
-
+          sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i settings.gradle
+          sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i settings.gradle
+          sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i build.gradle
+          sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i build.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+          sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
              ./gradlew --no-daemon -PenableCrossCompilerPlugin=true rosco-web:installDist -x test
       - name: dockerBuildpush
@@ -1268,10 +1269,12 @@ jobs:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
         run: |
 
-           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i settings.gradle
-           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i settings.gradle
-           sed  -e 's/NEXUS_USERNAME/${{ secrets.NEXUS_USERNAME }}/' -i build.gradle
-           sed  -e 's/NEXUS_PASSWORD/${{ secrets.NEXUS_PASSWORD }}/' -i build.gradle
+            sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i settings.gradle
+            sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i settings.gradle
+            sed  -e 's|NEXUS_USERNAME|${{ secrets.NEXUS_USERNAME }}|' -i build.gradle
+            sed  -e 's|NEXUS_PASSWORD|${{ secrets.NEXUS_PASSWORD }}|' -i build.gradle
+            sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i settings.gradle
+            sed  -e 's|NEXUS_URL|${{ secrets.NEXUS_URL }}|' -i build.gradle
 
             ./gradlew --no-daemon -PenableCrossCompilerPlugin=true halyard-web:installDist -x test
       - name: dockerBuildpush
