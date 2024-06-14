@@ -67,14 +67,14 @@ jobs:
              
               ls -d */  | grep -v  "gradle" | sed 's/\///g' > ds.txt
               
-              #cat ds.txt
+              cat ds.txt
 
               for i in $(cat ds.txt) 
               do
                sed  s/NEXUSARTIID/$i/g patch > patchnew
-               #cat patchnew >> $i/$i.gradle
+               cat patchnew >> $i/$i.gradle
                
-               #cat $i/$i.gradle
+               cat $i/$i.gradle
          
               done
              
