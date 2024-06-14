@@ -50,7 +50,7 @@ jobs:
               repositories {
                  maven{
                  name = 'nexus'
-                 url "https://nexus.opsmx.net/repository/maven-snapshots/"
+                 url "${{ secrets.NEXUS_URL }}"
                   credentials {
                     username = "${{ secrets.NEXUS_USERNAME }}"
                     password = "${{ secrets.NEXUS_PASSWORD }}"
@@ -132,7 +132,7 @@ jobs:
               repositories {
                  maven{
                  name = 'nexus'
-                 url "https://nexus.opsmx.net/repository/maven-snapshots/"
+                 url "${{ secrets.NEXUS_URL }}"
                   credentials {
                     username = "${{ secrets.NEXUS_USERNAME }}"
                     password = "${{ secrets.NEXUS_PASSWORD }}"
@@ -209,7 +209,7 @@ jobs:
               repositories {
                  maven{
                  name = 'nexus'
-                 url "https://nexus.opsmx.net/repository/maven-snapshots/"
+                 url "${{ secrets.NEXUS_URL }}"
                   credentials {
                     username = "${{ secrets.NEXUS_USERNAME }}"
                     password = "${{ secrets.NEXUS_PASSWORD }}"
@@ -294,7 +294,7 @@ jobs:
               repositories {
                  maven{
                  name = 'nexus'
-                 url "https://nexus.opsmx.net/repository/maven-snapshots/"
+                 url "${{ secrets.NEXUS_URL }}"
                   credentials {
                     username = "${{ secrets.NEXUS_USERNAME }}"
                     password = "${{ secrets.NEXUS_PASSWORD }}"
@@ -372,7 +372,7 @@ jobs:
               repositories {
                  maven{
                  name = 'nexus'
-                 url "https://nexus.opsmx.net/repository/maven-snapshots/"
+                 url "${{ secrets.NEXUS_URL }}"
                   credentials {
                     username = "${{ secrets.NEXUS_USERNAME }}"
                     password = "${{ secrets.NEXUS_PASSWORD }}"
