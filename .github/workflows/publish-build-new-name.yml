@@ -1,4 +1,4 @@
-name:  new  name kork publish and Build All including Halyard
+name:  new name kork publish and Build All including Halyard
 on:
   workflow_dispatch:
   workflow_call:
@@ -437,7 +437,7 @@ jobs:
         run: |
           echo ::set-output name=REPO::ubi8-clouddriver-cve
           ##echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
 
@@ -477,7 +477,7 @@ jobs:
             TARGETARCH=amd64
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}"
@@ -490,7 +490,7 @@ jobs:
             TARGETARCH=amd64
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags:  "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.GITHASH }}-${{ steps.build_variables.outputs.BUILDDATE }}-dev"
@@ -528,7 +528,7 @@ jobs:
         run: |
           echo ::set-output name=REPO::ubi8-deck-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
 
@@ -595,7 +595,7 @@ jobs:
         run: |
           echo ::set-output name=REPO::ubi8-echo-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -623,10 +623,10 @@ jobs:
         with:
           context: .
           build-args: |
-            CUSTOMPLUGIN_RELEASEVERSION_PLUGIN=v4.0.4.2-rc5
+            CUSTOMPLUGIN_RELEASEVERSION_PLUGIN=4.0.4.2-rc5
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
@@ -636,10 +636,10 @@ jobs:
         with:
           context: .
           build-args: |
-            CUSTOMPLUGIN_RELEASEVERSION_PLUGIN=v4.0.4.2-rc5
+            CUSTOMPLUGIN_RELEASEVERSION_PLUGIN=4.0.4.2-rc5
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
@@ -679,7 +679,7 @@ jobs:
         run: |
           echo ::set-output name=REPO::ubi8-fiat-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -709,7 +709,7 @@ jobs:
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
@@ -721,7 +721,7 @@ jobs:
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
@@ -760,7 +760,7 @@ jobs:
         run: |
           echo ::set-output name=REPO::ubi8-front50-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -790,7 +790,7 @@ jobs:
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
@@ -802,7 +802,7 @@ jobs:
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
@@ -845,7 +845,7 @@ jobs:
            echo git tag is ${GITHUB_REF#refs/*/}
           echo ::set-output name=REPO::ubi8-gate-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -872,10 +872,10 @@ jobs:
         with:
           context: .
           build-args: |
-            CUSTOMPLUGIN_RELEASEVERSION=v4.0.4.2-rc5
+            CUSTOMPLUGIN_RELEASEVERSION=4.0.4.2-rc5
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASE_VERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
@@ -885,10 +885,10 @@ jobs:
         with:
           context: .
           build-args: |
-            CUSTOMPLUGIN_RELEASEVERSION=v4.0.4.2-rc5
+            CUSTOMPLUGIN_RELEASEVERSION=4.0.4.2-rc5
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASE_VERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
@@ -928,7 +928,7 @@ jobs:
         run: |
           echo ::set-output name=REPO::ubi8-igor-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -966,7 +966,7 @@ jobs:
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
@@ -978,7 +978,7 @@ jobs:
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
@@ -1018,7 +1018,7 @@ jobs:
         run: |
           echo ::set-output name=REPO::ubi8-kayenta-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -1048,7 +1048,7 @@ jobs:
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
@@ -1088,7 +1088,7 @@ jobs:
         run: |
           echo ::set-output name=REPO::ubi8-orca-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -1117,10 +1117,10 @@ jobs:
         with:
           context: .
           build-args: |
-            CUSTOMPLUGIN_RELEASEVERSION=v4.0.4.2-rc5
+            CUSTOMPLUGIN_RELEASEVERSION=4.0.4.2-rc5
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASE_VERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
@@ -1130,10 +1130,10 @@ jobs:
         with:
           context: .
           build-args: |
-            CUSTOMPLUGIN_RELEASEVERSION=v4.0.4.2-rc5
+            CUSTOMPLUGIN_RELEASEVERSION=4.0.4.2-rc5
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASE_VERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
@@ -1173,7 +1173,7 @@ jobs:
         run: |
           echo ::set-output name=REPO::ubi8-rosco-cve
           #echo ::set-output name=VERSION::"1.33.x$(date --utc +'%-m%d')"
-          echo ::set-output name=VERSION::"1.33.x"
+          echo ::set-output name=VERSION::"1.33.2"
           echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
       - name: Login to Quay
@@ -1203,7 +1203,7 @@ jobs:
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
@@ -1215,7 +1215,7 @@ jobs:
           build-args: |
             CUSTOMPLUGIN_RELEASEORG=opsmx
             CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
-            CUSTOMPLUGIN_RELEASEVERSION=v1.0.1
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
           file: docker/ubi8/Dockerfile-dev
           push: true
           tags: |
